@@ -13,27 +13,39 @@ public class ApiRespHead {
     /**
      * 接口返回码
      */
-    private int code;
+    private int success;
     /**
      * 错误信息
      */
     private String message;
 
-    private int errorCode;
+    private int code;
 
     
     public ApiRespHead() {
 
     }
-    public ApiRespHead(int code, String message) {
-        this.code = code;
+    public ApiRespHead(int success, String message) {
+        this.success = success;
         this.message = message;
     }
 
-    public ApiRespHead(int code, String message, int errorCode) {
-        this.code = code;
+    public ApiRespHead(int success, String message, int code) {
+        this.success = success;
         this.message = message;
-        this.errorCode = errorCode;
+        this.code = code;
+    }
+
+    public int getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(int success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public int getCode() {
@@ -42,18 +54,6 @@ public class ApiRespHead {
 
     public void setCode(int code) {
         this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public int getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
     }
 
     public void setMessage(String message) {

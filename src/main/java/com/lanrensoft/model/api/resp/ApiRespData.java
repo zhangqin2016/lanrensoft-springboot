@@ -26,7 +26,7 @@ public class ApiRespData<T> {
 
     private ApiRespData(ApiResultEnum resultCode, T body) {
         ApiRespHead apiRespHead = new ApiRespHead(resultCode.getCode(), resultCode.getMessage());
-        apiRespHead.setErrorCode(resultCode.getErrorCode());
+        apiRespHead.setCode(resultCode.getErrorCode());
         this.head = apiRespHead;
         this.body = body;
     }

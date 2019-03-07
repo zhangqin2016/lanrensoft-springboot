@@ -2,7 +2,7 @@
 <!DOCTYPE xml>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <contextName>lanrensoft</contextName>
-    <property name="log.path" value="log" />
+    <property name="log.path" value="logs" />
     <property name="log.maxHistory" value="15" />
     <property name="log.pattern" value="%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n" />
 
