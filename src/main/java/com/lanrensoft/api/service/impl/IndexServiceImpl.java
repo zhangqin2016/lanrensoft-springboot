@@ -1,8 +1,12 @@
 package com.lanrensoft.api.service.impl;
 
 import com.lanrensoft.api.service.IIndexService;
+import com.lanrensoft.base.mapper.SysUserMapper;
+import com.lanrensoft.base.po.SysUserExample;
 import com.lanrensoft.model.api.resp.ApiRespData;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author zhangqin
@@ -11,10 +15,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class IndexServiceImpl implements IIndexService {
-
+     @Resource
+    private SysUserMapper sysUserMapper;
 
     @Override
     public ApiRespData index() {
-        return ApiRespData.buildSucc();
+        SysUserExample sysUserExample = new SysUserExample();
+        return ApiRespData.buildSucc(sysUserMapper.selectByExample(sysUserExample));
     }
 }

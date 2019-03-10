@@ -20,11 +20,6 @@ public class IndexController {
 
     @RequestMapping("/")
     public ApiRespData index(){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return indexService.index();
     }
 }

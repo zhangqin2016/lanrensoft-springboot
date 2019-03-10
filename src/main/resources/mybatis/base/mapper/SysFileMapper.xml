@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanrensoft.base.mapper.SysFileMapper">
+  <resultMap id="BaseResultMap" type="com.lanrensoft.base.po.SysFile">
+    <id column="file_id" jdbcType="VARCHAR" property="fileId" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="file_height" jdbcType="INTEGER" property="fileHeight" />
+    <result column="file_width" jdbcType="INTEGER" property="fileWidth" />
+    <result column="file_size" jdbcType="INTEGER" property="fileSize" />
+    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="local" jdbcType="INTEGER" property="local" />
+    <result column="file_md5" jdbcType="VARCHAR" property="fileMd5" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    file_id, file_name, file_type, file_height, file_width, file_size, file_url, create_time, 
+    local, file_md5
+  </sql>
+  <select id="selectByExample" parameterType="com.lanrensoft.base.po.SysFileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_file
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_file
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lanrensoft.base.po.SysFileExample">
+    delete from sys_file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lanrensoft.base.po.SysFile">
+    insert into sys_file (file_id, file_name, file_type, 
+      file_height, file_width, file_size, 
+      file_url, create_time, local, 
+      file_md5)
+    values (#{fileId,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, 
+      #{fileHeight,jdbcType=INTEGER}, #{fileWidth,jdbcType=INTEGER}, #{fileSize,jdbcType=INTEGER}, 
+      #{fileUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{local,jdbcType=INTEGER}, 
+      #{fileMd5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lanrensoft.base.po.SysFile">
+    insert into sys_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="fileHeight != null">
+        file_height,
+      </if>
+      <if test="fileWidth != null">
+        file_width,
+      </if>
+      <if test="fileSize != null">
+        file_size,
+      </if>
+      <if test="fileUrl != null">
+        file_url,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="local != null">
+        local,
+      </if>
+      <if test="fileMd5 != null">
+        file_md5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileHeight != null">
+        #{fileHeight,jdbcType=INTEGER},
+      </if>
+      <if test="fileWidth != null">
+        #{fileWidth,jdbcType=INTEGER},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="local != null">
+        #{local,jdbcType=INTEGER},
+      </if>
+      <if test="fileMd5 != null">
+        #{fileMd5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lanrensoft.base.po.SysFileExample" resultType="java.lang.Long">
+    select count(*) from sys_file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_file
+    <set>
+      <if test="record.fileId != null">
+        file_id = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileName != null">
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileType != null">
+        file_type = #{record.fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileHeight != null">
+        file_height = #{record.fileHeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileWidth != null">
+        file_width = #{record.fileWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileSize != null">
+        file_size = #{record.fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileUrl != null">
+        file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.local != null">
+        local = #{record.local,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileMd5 != null">
+        file_md5 = #{record.fileMd5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_file
+    set file_id = #{record.fileId,jdbcType=VARCHAR},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      file_type = #{record.fileType,jdbcType=VARCHAR},
+      file_height = #{record.fileHeight,jdbcType=INTEGER},
+      file_width = #{record.fileWidth,jdbcType=INTEGER},
+      file_size = #{record.fileSize,jdbcType=INTEGER},
+      file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      local = #{record.local,jdbcType=INTEGER},
+      file_md5 = #{record.fileMd5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lanrensoft.base.po.SysFile">
+    update sys_file
+    <set>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileHeight != null">
+        file_height = #{fileHeight,jdbcType=INTEGER},
+      </if>
+      <if test="fileWidth != null">
+        file_width = #{fileWidth,jdbcType=INTEGER},
+      </if>
+      <if test="fileSize != null">
+        file_size = #{fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null">
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="local != null">
+        local = #{local,jdbcType=INTEGER},
+      </if>
+      <if test="fileMd5 != null">
+        file_md5 = #{fileMd5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lanrensoft.base.po.SysFile">
+    update sys_file
+    set file_name = #{fileName,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      file_height = #{fileHeight,jdbcType=INTEGER},
+      file_width = #{fileWidth,jdbcType=INTEGER},
+      file_size = #{fileSize,jdbcType=INTEGER},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      local = #{local,jdbcType=INTEGER},
+      file_md5 = #{fileMd5,jdbcType=VARCHAR}
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </update>
+</mapper>
