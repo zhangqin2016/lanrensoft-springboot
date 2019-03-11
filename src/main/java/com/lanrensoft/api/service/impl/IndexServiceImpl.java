@@ -21,6 +21,7 @@ public class IndexServiceImpl implements IIndexService {
     @Override
     public ApiRespData index() {
         SysUserExample sysUserExample = new SysUserExample();
+        sysUserExample.createCriteria().andUserAccountEqualTo("admin");
         return ApiRespData.buildSucc(sysUserMapper.selectByExample(sysUserExample));
     }
 }
