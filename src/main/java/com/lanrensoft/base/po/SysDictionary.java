@@ -3,15 +3,15 @@ package com.lanrensoft.base.po;
 public class SysDictionary {
     private String id;
 
-    private String code;
+    private String title;
 
     private String value;
 
     private String des;
 
-    private String name;
+    private String groupName;
 
-    private Integer defaultValue;
+    private String keyName;
 
     public String getId() {
         return id;
@@ -21,12 +21,12 @@ public class SysDictionary {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCode() {
-        return code;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String getValue() {
@@ -45,19 +45,19 @@ public class SysDictionary {
         this.des = des == null ? null : des.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setGroupName(String groupName) {
+        this.groupName = groupName == null ? null : groupName.trim();
     }
 
-    public Integer getDefaultValue() {
-        return defaultValue;
+    public String getKeyName() {
+        return keyName;
     }
 
-    public void setDefaultValue(Integer defaultValue) {
-        this.defaultValue = defaultValue;
+    public void setKeyName(String keyName) {
+        this.keyName = keyName == null ? null : keyName.trim();
     }
 }

@@ -7,15 +7,14 @@
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="user_pic" jdbcType="VARCHAR" property="userPic" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
     <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
-    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="status" jdbcType="SMALLINT" property="status" />
-    <result column="user_type" jdbcType="SMALLINT" property="userType" />
-    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    su_id, nick_name, user_password, user_pic, phone, email, create_time, update_time, 
-    create_user_id, update_user_id, uuid, status, user_type, user_account
+    su_id, nick_name, user_password, user_pic, phone, user_account, email, create_time, 
+    update_time, create_user_id, login_ip, update_user_id, status
   </sql>
   <select id="selectByExample" parameterType="com.lanrensoft.base.po.SysUserExample" resultMap="BaseResultMap">
     select
@@ -111,15 +110,15 @@
   </delete>
   <insert id="insert" parameterType="com.lanrensoft.base.po.SysUser">
     insert into sys_user (su_id, nick_name, user_password, 
-      user_pic, phone, email, 
-      create_time, update_time, create_user_id, 
-      update_user_id, uuid, status, 
-      user_type, user_account)
+      user_pic, phone, user_account, 
+      email, create_time, update_time, 
+      create_user_id, login_ip, update_user_id, 
+      status)
     values (#{suId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{userPic,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, 
-      #{updateUserId,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
-      #{userType,jdbcType=SMALLINT}, #{userAccount,jdbcType=VARCHAR})
+      #{userPic,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.lanrensoft.base.po.SysUser">
     insert into sys_user
@@ -139,6 +138,9 @@
       <if test="phone != null">
         phone,
       </if>
+      <if test="userAccount != null">
+        user_account,
+      </if>
       <if test="email != null">
         email,
       </if>
@@ -151,20 +153,14 @@
       <if test="createUserId != null">
         create_user_id,
       </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
       <if test="updateUserId != null">
         update_user_id,
       </if>
-      <if test="uuid != null">
-        uuid,
-      </if>
       <if test="status != null">
         status,
-      </if>
-      <if test="userType != null">
-        user_type,
-      </if>
-      <if test="userAccount != null">
-        user_account,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -183,6 +179,9 @@
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
@@ -195,20 +194,14 @@
       <if test="createUserId != null">
         #{createUserId,jdbcType=VARCHAR},
       </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
       <if test="updateUserId != null">
         #{updateUserId,jdbcType=VARCHAR},
       </if>
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
-      </if>
       <if test="status != null">
         #{status,jdbcType=SMALLINT},
-      </if>
-      <if test="userType != null">
-        #{userType,jdbcType=SMALLINT},
-      </if>
-      <if test="userAccount != null">
-        #{userAccount,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -236,6 +229,9 @@
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
+      <if test="record.userAccount != null">
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
@@ -248,20 +244,14 @@
       <if test="record.createUserId != null">
         create_user_id = #{record.createUserId,jdbcType=VARCHAR},
       </if>
+      <if test="record.loginIp != null">
+        login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
       <if test="record.updateUserId != null">
         update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
       </if>
-      <if test="record.uuid != null">
-        uuid = #{record.uuid,jdbcType=VARCHAR},
-      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=SMALLINT},
-      </if>
-      <if test="record.userType != null">
-        user_type = #{record.userType,jdbcType=SMALLINT},
-      </if>
-      <if test="record.userAccount != null">
-        user_account = #{record.userAccount,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -275,15 +265,14 @@
       user_password = #{record.userPassword,jdbcType=VARCHAR},
       user_pic = #{record.userPic,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      login_ip = #{record.loginIp,jdbcType=VARCHAR},
       update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
-      uuid = #{record.uuid,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=SMALLINT},
-      user_type = #{record.userType,jdbcType=SMALLINT},
-      user_account = #{record.userAccount,jdbcType=VARCHAR}
+      status = #{record.status,jdbcType=SMALLINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -303,6 +292,9 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
+      <if test="userAccount != null">
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
@@ -315,20 +307,14 @@
       <if test="createUserId != null">
         create_user_id = #{createUserId,jdbcType=VARCHAR},
       </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
       <if test="updateUserId != null">
         update_user_id = #{updateUserId,jdbcType=VARCHAR},
       </if>
-      <if test="uuid != null">
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
       <if test="status != null">
         status = #{status,jdbcType=SMALLINT},
-      </if>
-      <if test="userType != null">
-        user_type = #{userType,jdbcType=SMALLINT},
-      </if>
-      <if test="userAccount != null">
-        user_account = #{userAccount,jdbcType=VARCHAR},
       </if>
     </set>
     where su_id = #{suId,jdbcType=VARCHAR}
@@ -339,15 +325,14 @@
       user_password = #{userPassword,jdbcType=VARCHAR},
       user_pic = #{userPic,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
+      user_account = #{userAccount,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=VARCHAR},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
       update_user_id = #{updateUserId,jdbcType=VARCHAR},
-      uuid = #{uuid,jdbcType=VARCHAR},
-      status = #{status,jdbcType=SMALLINT},
-      user_type = #{userType,jdbcType=SMALLINT},
-      user_account = #{userAccount,jdbcType=VARCHAR}
+      status = #{status,jdbcType=SMALLINT}
     where su_id = #{suId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -11,7 +11,6 @@
     <result column="pid" jdbcType="VARCHAR" property="pid" />
     <result column="status" jdbcType="SMALLINT" property="status" />
     <result column="uuid" jdbcType="VARCHAR" property="uuid" />
-    <result column="levels" jdbcType="SMALLINT" property="levels" />
     <result column="type" jdbcType="SMALLINT" property="type" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -73,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    nav_id, name, url, url_target, icon_url, sort, pid, status, uuid, levels, type
+    nav_id, name, url, url_target, icon_url, sort, pid, status, uuid, type
   </sql>
   <select id="selectByExample" parameterType="com.lanrensoft.base.po.SysNavExample" resultMap="BaseResultMap">
     select
@@ -109,11 +108,11 @@
     insert into sys_nav (nav_id, name, url, 
       url_target, icon_url, sort, 
       pid, status, uuid, 
-      levels, type)
+      type)
     values (#{navId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{urlTarget,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{sort,jdbcType=SMALLINT}, 
       #{pid,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{uuid,jdbcType=VARCHAR}, 
-      #{levels,jdbcType=SMALLINT}, #{type,jdbcType=SMALLINT})
+      #{type,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.lanrensoft.base.po.SysNav">
     insert into sys_nav
@@ -144,9 +143,6 @@
       </if>
       <if test="uuid != null">
         uuid,
-      </if>
-      <if test="levels != null">
-        levels,
       </if>
       <if test="type != null">
         type,
@@ -179,9 +175,6 @@
       </if>
       <if test="uuid != null">
         #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="levels != null">
-        #{levels,jdbcType=SMALLINT},
       </if>
       <if test="type != null">
         #{type,jdbcType=SMALLINT},
@@ -224,9 +217,6 @@
       <if test="record.uuid != null">
         uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
-      <if test="record.levels != null">
-        levels = #{record.levels,jdbcType=SMALLINT},
-      </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=SMALLINT},
       </if>
@@ -246,7 +236,6 @@
       pid = #{record.pid,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=SMALLINT},
       uuid = #{record.uuid,jdbcType=VARCHAR},
-      levels = #{record.levels,jdbcType=SMALLINT},
       type = #{record.type,jdbcType=SMALLINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -279,9 +268,6 @@
       <if test="uuid != null">
         uuid = #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="levels != null">
-        levels = #{levels,jdbcType=SMALLINT},
-      </if>
       <if test="type != null">
         type = #{type,jdbcType=SMALLINT},
       </if>
@@ -298,7 +284,6 @@
       pid = #{pid,jdbcType=VARCHAR},
       status = #{status,jdbcType=SMALLINT},
       uuid = #{uuid,jdbcType=VARCHAR},
-      levels = #{levels,jdbcType=SMALLINT},
       type = #{type,jdbcType=SMALLINT}
     where nav_id = #{navId,jdbcType=VARCHAR}
   </update>

@@ -3,11 +3,11 @@
 <mapper namespace="com.lanrensoft.base.mapper.SysDictionaryMapper">
   <resultMap id="BaseResultMap" type="com.lanrensoft.base.po.SysDictionary">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="value" jdbcType="VARCHAR" property="value" />
     <result column="des" jdbcType="VARCHAR" property="des" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="default_value" jdbcType="INTEGER" property="defaultValue" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="key_name" jdbcType="VARCHAR" property="keyName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, code, value, des, name, default_value
+    id, title, value, des, group_name, key_name
   </sql>
   <select id="selectByExample" parameterType="com.lanrensoft.base.po.SysDictionaryExample" resultMap="BaseResultMap">
     select
@@ -101,11 +101,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.lanrensoft.base.po.SysDictionary">
-    insert into sys_dictionary (id, code, value, 
-      des, name, default_value
+    insert into sys_dictionary (id, title, value, 
+      des, group_name, key_name
       )
-    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
-      #{des,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{defaultValue,jdbcType=INTEGER}
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
+      #{des,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{keyName,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lanrensoft.base.po.SysDictionary">
@@ -114,8 +114,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="code != null">
-        code,
+      <if test="title != null">
+        title,
       </if>
       <if test="value != null">
         value,
@@ -123,19 +123,19 @@
       <if test="des != null">
         des,
       </if>
-      <if test="name != null">
-        name,
+      <if test="groupName != null">
+        group_name,
       </if>
-      <if test="defaultValue != null">
-        default_value,
+      <if test="keyName != null">
+        key_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="value != null">
         #{value,jdbcType=VARCHAR},
@@ -143,11 +143,11 @@
       <if test="des != null">
         #{des,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
       </if>
-      <if test="defaultValue != null">
-        #{defaultValue,jdbcType=INTEGER},
+      <if test="keyName != null">
+        #{keyName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -163,8 +163,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.value != null">
         value = #{record.value,jdbcType=VARCHAR},
@@ -172,11 +172,11 @@
       <if test="record.des != null">
         des = #{record.des,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.groupName != null">
+        group_name = #{record.groupName,jdbcType=VARCHAR},
       </if>
-      <if test="record.defaultValue != null">
-        default_value = #{record.defaultValue,jdbcType=INTEGER},
+      <if test="record.keyName != null">
+        key_name = #{record.keyName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -186,11 +186,11 @@
   <update id="updateByExample" parameterType="map">
     update sys_dictionary
     set id = #{record.id,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
       value = #{record.value,jdbcType=VARCHAR},
       des = #{record.des,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      default_value = #{record.defaultValue,jdbcType=INTEGER}
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      key_name = #{record.keyName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,8 +198,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.lanrensoft.base.po.SysDictionary">
     update sys_dictionary
     <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="value != null">
         value = #{value,jdbcType=VARCHAR},
@@ -207,22 +207,22 @@
       <if test="des != null">
         des = #{des,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
       </if>
-      <if test="defaultValue != null">
-        default_value = #{defaultValue,jdbcType=INTEGER},
+      <if test="keyName != null">
+        key_name = #{keyName,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lanrensoft.base.po.SysDictionary">
     update sys_dictionary
-    set code = #{code,jdbcType=VARCHAR},
+    set title = #{title,jdbcType=VARCHAR},
       value = #{value,jdbcType=VARCHAR},
       des = #{des,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      default_value = #{defaultValue,jdbcType=INTEGER}
+      group_name = #{groupName,jdbcType=VARCHAR},
+      key_name = #{keyName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

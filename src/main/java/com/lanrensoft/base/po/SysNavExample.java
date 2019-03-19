@@ -714,66 +714,6 @@ public class SysNavExample {
             return (Criteria) this;
         }
 
-        public Criteria andLevelsIsNull() {
-            addCriterion("levels is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsIsNotNull() {
-            addCriterion("levels is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsEqualTo(Short value) {
-            addCriterion("levels =", value, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsNotEqualTo(Short value) {
-            addCriterion("levels <>", value, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsGreaterThan(Short value) {
-            addCriterion("levels >", value, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsGreaterThanOrEqualTo(Short value) {
-            addCriterion("levels >=", value, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsLessThan(Short value) {
-            addCriterion("levels <", value, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsLessThanOrEqualTo(Short value) {
-            addCriterion("levels <=", value, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsIn(List<Short> values) {
-            addCriterion("levels in", values, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsNotIn(List<Short> values) {
-            addCriterion("levels not in", values, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsBetween(Short value1, Short value2) {
-            addCriterion("levels between", value1, value2, "levels");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelsNotBetween(Short value1, Short value2) {
-            addCriterion("levels not between", value1, value2, "levels");
-            return (Criteria) this;
-        }
-
         public Criteria andTypeIsNull() {
             addCriterion("type is null");
             return (Criteria) this;

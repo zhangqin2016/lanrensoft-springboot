@@ -13,6 +13,8 @@ public class SysUser {
 
     private String phone;
 
+    private String userAccount;
+
     private String email;
 
     private Date createTime;
@@ -21,15 +23,11 @@ public class SysUser {
 
     private String createUserId;
 
+    private String loginIp;
+
     private String updateUserId;
 
-    private String uuid;
-
     private Short status;
-
-    private Short userType;
-
-    private String userAccount;
 
     public String getSuId() {
         return suId;
@@ -71,6 +69,14 @@ public class SysUser {
         this.phone = phone == null ? null : phone.trim();
     }
 
+    public String getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount == null ? null : userAccount.trim();
+    }
+
     public String getEmail() {
         return email;
     }
@@ -103,6 +109,14 @@ public class SysUser {
         this.createUserId = createUserId == null ? null : createUserId.trim();
     }
 
+    public String getLoginIp() {
+        return loginIp;
+    }
+
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp == null ? null : loginIp.trim();
+    }
+
     public String getUpdateUserId() {
         return updateUserId;
     }
@@ -111,35 +125,11 @@ public class SysUser {
         this.updateUserId = updateUserId == null ? null : updateUserId.trim();
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid == null ? null : uuid.trim();
-    }
-
     public Short getStatus() {
         return status;
     }
 
     public void setStatus(Short status) {
         this.status = status;
-    }
-
-    public Short getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Short userType) {
-        this.userType = userType;
-    }
-
-    public String getUserAccount() {
-        return userAccount;
-    }
-
-    public void setUserAccount(String userAccount) {
-        this.userAccount = userAccount == null ? null : userAccount.trim();
     }
 }

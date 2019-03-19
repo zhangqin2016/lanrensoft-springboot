@@ -19,8 +19,6 @@ public class SysNav {
 
     private String uuid;
 
-    private Short levels;
-
     private Short type;
 
     public String getNavId() {
@@ -93,14 +91,6 @@ public class SysNav {
 
     public void setUuid(String uuid) {
         this.uuid = uuid == null ? null : uuid.trim();
-    }
-
-    public Short getLevels() {
-        return levels;
-    }
-
-    public void setLevels(Short levels) {
-        this.levels = levels;
     }
 
     public Short getType() {
