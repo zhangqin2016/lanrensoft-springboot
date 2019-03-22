@@ -3,6 +3,7 @@ package com.lanrensoft.api.controller;
 import com.lanrensoft.api.service.IIndexService;
 import com.lanrensoft.model.api.resp.ApiRespData;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,9 @@ import javax.annotation.Resource;
 public class IndexController {
 
     @RequestMapping("/")
-    public String index(){
+    public String index(ModelMap modelMap){
+        modelMap.put("title","你好，世界");
         return "index";
     }
+
 }
