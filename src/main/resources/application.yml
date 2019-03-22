@@ -41,7 +41,7 @@ spring:
         # 忽略过滤的格式
         exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*,/actuator/*'
 
-      # StatViewServlet配置 
+      # StatViewServlet配置
       stat-view-servlet:
         enabled: true
         # 访问路径为/druid时，跳转到StatViewServlet
@@ -77,3 +77,23 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+  spring:
+    freemarker:
+      allow-request-override: false
+      allow-session-override: false
+      charset: UTF-8
+      check-template-location:
+      content-type: text/html
+      enabled: true
+      expose-request-attributes: false
+      expose-session-attributes: false
+      expose-spring-macro-helpers: true
+      prefer-file-system-access: true
+      prefix: /console/templates/
+      request-context-attribute:
+      settings:
+        '*':
+      suffix: .html
+      template-loader-path: classpath:/console/templates/
+      view-names:
