@@ -20,7 +20,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(ModelMap modelMap){
         modelMap.put("title","你好，世界");
-        return "index";
+        return "login/";
     }
 
 }
