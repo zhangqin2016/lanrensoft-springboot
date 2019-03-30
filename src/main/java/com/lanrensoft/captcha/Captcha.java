@@ -1,5 +1,8 @@
 package com.lanrensoft.captcha;
 
+/**
+ * 复制于网络
+ */
 public interface Captcha {
 
     /**
