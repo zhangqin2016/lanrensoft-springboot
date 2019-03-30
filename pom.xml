@@ -28,6 +28,7 @@
         <beetl.version>2.9.8</beetl.version>
         <mysql-connector-java.version>5.1.6</mysql-connector-java.version>
         <fastjson.version>1.2.55</fastjson.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <!-- Add typical dependencies for a web application -->
@@ -35,6 +36,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -124,6 +130,13 @@
             <groupId>com.ibeetl</groupId>
             <artifactId>beetl</artifactId>
             <version>${beetl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+            <version>${junit.version}</version>
         </dependency>
     </dependencies>
 
