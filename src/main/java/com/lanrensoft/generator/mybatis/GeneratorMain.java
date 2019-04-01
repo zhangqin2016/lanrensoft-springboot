@@ -1,8 +1,8 @@
-package com.lanrensoft.generator;
+package com.lanrensoft.generator.mybatis;
 
 
-import com.lanrensoft.generator.util.GeneratorConfigXml;
-import com.lanrensoft.generator.util.GeneratorMetadata;
+import com.lanrensoft.generator.mybatis.util.GeneratorConfigXml;
+import com.lanrensoft.generator.mybatis.util.GeneratorMetadata;
 
 /**
  * Created by zhangqin on 2016/4/8.

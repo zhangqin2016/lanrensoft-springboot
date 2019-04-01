@@ -1,4 +1,4 @@
-package com.lanrensoft.generator.util.template;
+package com.lanrensoft.generator.mybatis.util.template;
 
 
 import com.lanrensoft.common.kit.PathKit;

@@ -1,4 +1,4 @@
-package com.lanrensoft.generator.util;
+package com.lanrensoft.generator.mybatis.util;
 
 
 import com.google.common.collect.Lists;
@@ -8,9 +8,9 @@ import com.lanrensoft.common.kit.Prop;
 import org.apache.commons.io.FileUtils;
 import org.beetl.core.Template;
 import com.lanrensoft.common.kit.PropKit;
-import com.lanrensoft.generator.jdbc.WeJdbcTemplate;
-import com.lanrensoft.generator.model.Table;
-import com.lanrensoft.generator.util.template.MyBatisGeneratorBuildTemplate;
+import com.lanrensoft.generator.mybatis.jdbc.WeJdbcTemplate;
+import com.lanrensoft.generator.mybatis.model.Table;
+import com.lanrensoft.generator.mybatis.util.template.MyBatisGeneratorBuildTemplate;
 
 import java.io.File;
 import java.io.IOException;

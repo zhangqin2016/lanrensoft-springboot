@@ -58,7 +58,7 @@ public class ImageCode {
 
     @Override
     public String toString() {
-        return "ImageCode{" + "code=" + code + '}';
+        return "ImageCode{" + "lanren=" + code + '}';
     }
 
 }

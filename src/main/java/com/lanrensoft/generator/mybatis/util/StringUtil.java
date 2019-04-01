@@ -1,7 +1,4 @@
-package com.lanrensoft.generator.util;
-
-
-import org.springframework.util.StringUtils;
+package com.lanrensoft.generator.mybatis.util;
 
 
 public class StringUtil {

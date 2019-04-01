@@ -1,9 +1,8 @@
-package com.lanrensoft.generator.jdbc;
+package com.lanrensoft.generator.mybatis.jdbc;
 
 
 import com.lanrensoft.common.kit.Prop;
-import com.lanrensoft.common.kit.PropKit;
-import com.lanrensoft.generator.util.GeneratorConfigXml;
+import com.lanrensoft.generator.mybatis.util.GeneratorConfigXml;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;

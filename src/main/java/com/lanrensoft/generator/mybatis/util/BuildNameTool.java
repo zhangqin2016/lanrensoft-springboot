@@ -1,4 +1,4 @@
-package com.lanrensoft.generator.util;
+package com.lanrensoft.generator.mybatis.util;
 
 /**
  * <p>

@@ -9,7 +9,7 @@ public class ECaptcha extends AbstractCaptcha {
     public final static String CODEER_NAME = "ECaptcha";
     // 验证码编码数据
     private String captchaCodeSource = "0123456789";
-    // 验证码运算数据（使用 Java Unicode code，加减乘除）
+    // 验证码运算数据（使用 Java Unicode lanren，加减乘除）
     private String captchaOperationSource = "\u52A0\u51CF\u4E58\u9664";
     // 验证码运算符等于
     private String captchaEqualCode = "=";

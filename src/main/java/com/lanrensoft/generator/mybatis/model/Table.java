@@ -1,7 +1,7 @@
-package com.lanrensoft.generator.model;
+package com.lanrensoft.generator.mybatis.model;
 
 
-import com.lanrensoft.generator.util.BuildNameTool;
+import com.lanrensoft.generator.mybatis.util.BuildNameTool;
 import org.springframework.util.StringUtils;
 
 

@@ -1,4 +1,4 @@
-package com.lanrensoft.generator.util;
+package com.lanrensoft.generator.mybatis.util;
 
 
 import com.lanrensoft.common.kit.Prop;
