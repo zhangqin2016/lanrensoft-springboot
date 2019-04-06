@@ -1,0 +1,55 @@
+package ${basePackage}.console.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import zhang.lao.annotation.RepeatSubmit;
+import zhang.lao.pojo.console.req.BootStrapGridReq;
+import zhang.lao.pojo.console.resp.BootStrapGridResp;
+import zhang.lao.pojo.console.resp.HttpResult;
+import zhang.lao.service.console.base.${beanService};
+import javax.annotation.Resource;
+/**
+* ${description!}
+* @author ${author!}
+* @create ${createTime!}
+**/
+@Controller
+public class ${beanName}Controller{
+	@Resource
+	private ${beanService} ${caseBeanService};
+
+	@RequestMapping("${baseUrl}add")
+	@RepeatSubmit(isAdd = true)
+	public String add(){
+		return ${caseBeanService}.add();
+	}
+
+	@RepeatSubmit(isAdd = true)
+	@RequestMapping("${baseUrl}edit")
+	public String edit(ModelMap modelMap,${idType!} id){
+		return  ${caseBeanService}.edit(modelMap,id);
+	}
+
+	@RequestMapping("${baseUrl}list")
+	public String list(){
+		return  ${caseBeanService}.list();
+	}
+
+	@RequestMapping("${baseUrl}json")
+	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
+		return ${caseBeanService}.json(bootGridReq);
+	}
+
+	@RepeatSubmit(isAdd = false)
+	@RequestMapping("${baseUrl}save")
+	public @ResponseBody HttpResult save(String formObjectJson){
+		return ${caseBeanService}.save(formObjectJson);
+
+	}
+
+	@RequestMapping("${baseUrl}delete")
+	public @ResponseBody HttpResult delete(String ids){
+        return ${caseBeanService}.delete(ids);
+	}
+}

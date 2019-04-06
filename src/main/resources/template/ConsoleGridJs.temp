@@ -1,0 +1,22 @@
+
+layui.use(['layer','laydate'], function(){
+
+});
+
+var ${tableName}ConsoleGrid =new consoleGrid({table_id:"${tableName}"});
+${tableName}ConsoleGrid.init();
+function ${tableName}TableOperate(value){
+return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"${tableName}\",\""+zqCtxPath+"${baseUrl}edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+}
+function ${tableName}LoadParam(params){
+params.query=${tableName}QueryString();
+return params;
+}
+function ${tableName}QueryString() {
+var objQuery = new Object();
+${tableQuerySet}
+var queryString = JSON.stringify(objQuery);
+return queryString;
+}
+
+${tableFormatter!}

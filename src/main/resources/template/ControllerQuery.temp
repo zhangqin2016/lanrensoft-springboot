@@ -1,0 +1,26 @@
+package com.lanrensoft.jdbc.auto.tool;
+
+import com.alibaba.fastjson.JSON;
+
+<% for (criteria in criterias ){ %>
+import com.lanrensoft.jdbc.auto.model.${criteria.tableName};
+import com.lanrensoft.jdbc.auto.model.${criteria.tableName}Example;
+<% } %>
+/**
+* ${description!}
+* @author ${author!}
+* @create ${createTime!}
+**/
+public class ControllerQueryTool {
+
+    <% for (criteria in criterias ){ %>
+    public static  ${criteria.tableName}Example.Criteria set${criteria.tableName}Criteria(String querys,${criteria.tableName}Example.Criteria criteria){
+        ${criteria.tableName} ${criteria.tableCaseName} = JSON.parseObject(querys, ${criteria.tableName}.class);
+        ${criteria.where}
+        return criteria;
+    }
+
+
+    <% } %>
+
+}

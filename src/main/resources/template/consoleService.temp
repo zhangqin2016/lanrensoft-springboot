@@ -1,0 +1,77 @@
+package zhang.lao.service.console.base;
+import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+
+import zhang.lao.dao.base.${beanDao};
+import com.lanrensoft.jdbc.auto.model.${beanName};
+import com.lanrensoft.jdbc.auto.model.${beanName}Example;
+import zhang.lao.build.tool.LzStringUtils;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
+import com.lanrensoft.jdbc.auto.tool.ControllerQueryTool;
+import zhang.lao.pojo.console.req.BootStrapGridReq;
+import zhang.lao.pojo.console.resp.BootStrapGridResp;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
+import zhang.lao.pojo.console.resp.HttpResult;
+import javax.annotation.Resource;
+import java.util.List;
+import zhang.lao.build.tool.UUIDTool;
+/**
+* ${description!}
+* @author ${author!}
+* @create ${createTime!}
+**/
+ @Service
+public class ${beanName}Service{
+	@Resource
+	private ${beanDao} ${caseBeanDao};
+
+	public String add(){
+		return "console/${caseBeanName}/${caseBeanName}_form";
+	}
+
+	public String edit(ModelMap modelMap,${idType} id){
+			modelMap.put("${caseBeanName}", ${caseBeanDao}.selectByPrimaryKey(id));
+		return "console/${caseBeanName}/${caseBeanName}_form";
+	}
+
+	public String list(){
+		return "console/${caseBeanName}/${caseBeanName}_table";
+	}
+
+	public BootStrapGridResp json(BootStrapGridReq bootGridReq){
+		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
+    	if(bootGridReq.getSort()!=null) {
+    		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
+    	}
+		${beanName}Example ${caseBeanName}Example = new ${beanName}Example();
+        ControllerQueryTool.set${beanName}Criteria(bootGridReq.getQuery(),${caseBeanName}Example.createCriteria());
+		List<${beanName}> ${caseBeanName}List = ${caseBeanDao}.selectByExample(${caseBeanName}Example);
+		return new BootStrapGridResp(page.getTotal(),${caseBeanName}List);
+	}
+
+	public HttpResult save(String formObjectJson){
+		${beanName} ${caseBeanName}= JSON.parseObject(formObjectJson,${beanName}.class);
+			${idType} id=${caseBeanName}.get${idName}();
+		if (id!=null) {
+			${caseBeanDao}.updateByPrimaryKeySelective(${caseBeanName});
+		}else{
+		    id=UUIDTool.getUUID();
+			${caseBeanName}.set${idName}(id);
+			${caseBeanDao}.insertSelective(${caseBeanName});
+		}
+		return HttpResultUtil.buildSuccess(id);
+
+	}
+
+	@Transactional
+	public HttpResult delete(String ids){
+		String[]idsa=ids.split(",");
+		for (String id : idsa) {
+		${caseBeanDao}.deleteByPrimaryKey(${idType}.valueOf(id));
+		}
+		return HttpResultUtil.buildSuccess();
+	}
+}

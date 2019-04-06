@@ -1,0 +1,15 @@
+package zhang.lao.dao.base;
+
+import com.lanrensoft.jdbc.auto.dao.${beanName}Mapper;
+import com.lanrensoft.jdbc.auto.model.${beanName};
+
+import java.util.Map;
+
+/**
+* ${description!}
+* @author ${author!}
+* @create ${createTime!}
+**/
+public interface ${beanName}Dao extends ${beanName}Mapper {
+
+}

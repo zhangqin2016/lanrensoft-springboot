@@ -1,0 +1,50 @@
+
+<${symbol} var html={ ${symbol}>
+<blockquote class="layui-elem-quote zq-table-head">
+    ${tableTitle}
+</blockquote>
+                <div class='row zq-row'>
+                        <form name="${tableName}_form" id="${tableName}_form" class='form-inline'>
+                            ${tableQuery}
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <button type='button' class='btn btn-default' id='${tableName}QuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='${tableName}Reset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                 <div id="${tableName}Toolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('${tableName}','${ctxPath}${baseUrl}add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='${tableName}ConsoleGrid.delete("${tableIdName}","${ctxPath}${baseUrl}delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="${tableName}" data-toggle="table"
+                                         data-url="${ctxPath}${baseUrl}json"
+                                         data-pagination="true"
+                                         data-query-params="${tableName}LoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#${tableName}Toolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                           ${tableTh}
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<${symbol} }; ${symbol}>
+<${symbol} var js={ ${symbol}>
+<script type='text/javascript' src='${ctxPath}/view/console/${tableName}/${tableName}Table.js'></script>
+<${symbol} }; ${symbol}>
+
+<${symbol} layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} ${symbol}>

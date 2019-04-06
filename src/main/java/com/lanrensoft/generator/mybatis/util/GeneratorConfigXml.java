@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lanrensoft.common.kit.PathKit;
 import com.lanrensoft.common.kit.Prop;
+import com.lanrensoft.generator.auto.utils.GetTable;
 import org.apache.commons.io.FileUtils;
 import org.beetl.core.Template;
 import com.lanrensoft.common.kit.PropKit;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GeneratorConfigXml {
-    public static final Prop cfgMap = PropKit.use("mybatis-generator" + File.separator + "cfg.properties");
+    public static final Prop cfgMap = GetTable.prop;
     public static String generate() {
 
         Prop jdbcMap = cfgMap;

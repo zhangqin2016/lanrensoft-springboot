@@ -3,6 +3,7 @@ package com.lanrensoft.generator.mybatis.util;
 
 import com.lanrensoft.common.kit.Prop;
 import com.lanrensoft.common.kit.PropKit;
+import com.lanrensoft.generator.auto.utils.GetTable;
 
 import java.io.File;
 
@@ -22,7 +23,7 @@ public class FilesPath {
     }
 
     private void init() {
-        Prop cfgMap = PropKit.use("mybatis-generator" + File.separator + "cfg.properties");
+        Prop cfgMap = GetTable.prop;
         if (classPath == null || "".equals(classPath.trim())) {
             classPath = getClass().getResource("/").getFile().toString();
             classPath = classPath.substring(1, classPath.lastIndexOf('/'));

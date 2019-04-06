@@ -1,0 +1,20 @@
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">${coulumnTitle!}</label>
+ <div class="col-sm-3 col-xs-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="${coulumnCaseName}_file" class="form-control" value='${formValue}' >
+  <input type="hidden" id="${coulumnCaseName}"  name="${coulumnCaseName}"class="form-control" value='${formValue}' >
+    </span>
+  <div id="${coulumnCaseName}_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4 col-xs-4">
+   		<a id="${coulumnCaseName}_file_show" href="${formValue}" style="width:100px;word-wrap: break-word;" >${formValue}</a>
+ </div>
+ </div>
+
+   <script type="text/javascript"> 
+ </script>

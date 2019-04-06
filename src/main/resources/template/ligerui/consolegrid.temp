@@ -1,0 +1,84 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%String path = request.getContextPath() ;%>
+<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %> 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap-theme.min.css" rel="stylesheet">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<jsp:include page="../../import.jsp" flush="true" />
+<title> ${tableTitle!}</title>
+</head>
+<body class="iframeBody">
+<form class="form-inline">
+  <div class="form-group">
+    <label for="${column.columnName!}">Name</label>
+    <input type="text" class="form-control" id="${column.columnName!}" placeholder="${column.columnTitle!}">
+  </div>
+   	 ${searchParamHtml!}
+  <button type="button" id="search" class="btn btn-default">搜索</button>
+    <button type="button" id="reset" class="btn btn-default">重置</button>
+</form>
+<div id="${tableTitle!}grid" class="sq-grid"></div>
+</div>
+
+<script type="text/javascript">
+	var grid = null;
+	$(function () {
+		initGrid();
+	});
+	
+
+	//初始化列表
+	function initGrid(){
+		$("#demogrid").ligerGrid({
+	    	url: '${jsonUrl}',
+	    	method : 'post',
+	    	isSingleCheck: true,
+	    	parms:getSearchParams(),
+	        columns: [
+	          ${tableColumns!}
+	          getGridOperColumnContent()
+	        ],
+	        pageSize:10,
+	        root:'rows',
+	        record:'total',
+	        hideLoadButton : true,
+	        width: '100%',
+	        height:'100%',
+	        heightDiff:-2,
+	        checkbox:true,
+	        rownumbers:true
+	    });
+	    grid = liger.get("${tableTitle!}grid");
+	    grid.setHeight(100);
+	}
+	
+	
+  	//Grid操作列
+    function getGridOperColumnContent(){
+    	var data = {
+                display: '操作',
+                isSort: false,
+                width: 180,
+                render: function (rowdata, rowindex, value){
+                    var h='<a class="sq-button-hasicon" href="" ><i class=\"sqBtnIco_7\"></i>删除</a>"
+                        
+                        h+='<a class="sq-button-hasicon" href="" ><i class=\"sqBtnIco_4\"></i>修改</a>";
+                    return h;
+                }
+            }
+    	return data;
+	}
+
+	    //查询按钮事件
+    	function searchBtn(){
+    	 ${searchParamJs!}
+    	        grid.reload();
+    	}
+
+</script>
+
+</body>
+</html>
