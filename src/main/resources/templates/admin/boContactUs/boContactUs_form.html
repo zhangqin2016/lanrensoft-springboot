@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/view/console/common/css.html"){}	%>
+
+ <title></title>
+ </head>
+ <body>
+ <div class="zq-form">
+ <form name="boContactUs_form"  id="boContactUs_form" class="form-horizontal" style="margin-bottom: 70px;">
+   <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">联系人</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="linkName" id="linkName" class="form-control" check-type="" maxlength='255' value='${boContactUs.linkName!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">电话</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="linkPhone" id="linkPhone" class="form-control" check-type="" maxlength='255' value='${boContactUs.linkPhone!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">主题</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="linkSub" id="linkSub" class="form-control" check-type="" maxlength='255' value='${boContactUs.linkSub!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">内容</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="linkContent" id="linkContent" class="form-control" check-type="" maxlength='2000' value='${boContactUs.linkContent!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">时间</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="linkTime" id="linkTime" class="form-control" check-type=""  value='${boContactUs.linkTime!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">联系邮箱</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="linkMail" id="linkMail" class="form-control" check-type="" maxlength='255' value='${boContactUs.linkMail!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">处理状态</label>
+ <div class="col-sm-6 col-xs-6">
+ <div class="radio">
+ <label><input checked='checked' auto_name='boContactUs_linkState' type="radio"  name="linkState" value="0"/>未联系</label>
+ <label><input  auto_name='boContactUs_linkState' type="radio"  name="linkState" value="1"/>已联系</label>
+  
+ </div>
+ </div>
+  </div>
+ 
+   <input type='hidden' name='id' id='id' value='${boContactUs.id!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ </form>
+  <nav class="navbar navbar-default navbar-fixed-bottom" style="text-align: right">
+    <a href="#" class="btn btn-success" style="margin:10px" id = "saveForm">保存 </a>
+  </nav>
+ </div>
+ <% include("/view/console/common/js.html"){} 	%>
+ <script>
+
+
+    layui.use(['layer','laydate'], function(){
+    var laydate = layui.laydate;
+    var layer = layui.layer;
+    /*开启表单验证*/
+    $("#boContactUs_form").validation();
+           
+   $('input[auto_name="boContactUs_linkState"]').each(function(){
+    
+   if('${boContactUs.linkState!}'==this.value){ 
+             $(this).attr('checked','checked');
+            }
+           });
+ 
+
+    $("#saveForm").click(function(){
+        saveZqForm();
+
+    })
+    function saveZqForm(){
+        if ($("#boContactUs_form").valid() == false) {
+        return false;
+        }
+        var formObject=new Object();
+        formObject.linkName=$('#linkName').val()==''?null:$('#linkName').val(); 
+ formObject.linkPhone=$('#linkPhone').val()==''?null:$('#linkPhone').val(); 
+ formObject.linkSub=$('#linkSub').val()==''?null:$('#linkSub').val(); 
+ formObject.linkContent=$('#linkContent').val()==''?null:$('#linkContent').val(); 
+ formObject.linkTime=$('#linkTime').val()==''?null:$('#linkTime').val(); 
+ formObject.linkMail=$('#linkMail').val()==''?null:$('#linkMail').val(); 
+ formObject.linkState=($('input[name="linkState"]:checked').val()==''?null:$('input[name="linkState"]:checked').val()); 
+ formObject.id=$('#id').val()==''?null:$('#id').val(); 
+ 
+        var formObjectJson = JSON.stringify(formObject);
+        $.post("/console/bo_contact_us/save",
+        {
+        formObjectJson :formObjectJson,
+        common_token :$("#common_token").val()
+        }, function(data) {
+        layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+        parent.$("#boContactUs").bootstrapTable("refresh");
+        parent.layer.closeAll();
+        });
+
+        });
+        }
+    });
+
+ </script>
+ </body>

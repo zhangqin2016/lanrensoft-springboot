@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+	<title>后台管理</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	　<link rel="shortcut icon"href="/static/image/logo_black.png">
+	<link href="${ctxPath}/plugin/bootstrap-3.3.5-dist/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="${ctxPath}/plugin/loginplugin/css/templatemo_style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background: url(${ctxPath}/static/image/bg.jpg) no-repeat center center; background-size:cover;">
+	<div class="container" >
+		<div class="col-md-12 login-zq">
+			<form class="form-horizontal margin-bottom-30 zq-form-login" role="form" id="loginForm" action="${ctxPath}/console/login" method="post">
+				<div class="zq-form-group">
+					<div class="zq-row-head">
+					 后台登录
+					</div>
+				</div>
+		          <div class="zq-form-group">
+		          <div class="zq-row-login">
+		            	<label for="userAccount" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
+		            	<input type="text" class="form-control" id="userAccount" name="userAccount" value="${login.userAccount!}" placeholder="用户账户/手机号/邮箱">
+		          </div>
+		        </div>
+		        <div class="zq-form-group">
+		          <div class="zq-row-login">
+		            	<label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i></label>
+						<input class="form-control" name="password" id="password" placeholder="密码"  value="${login.password!}" onkeyup='loginEnterToQuery(event);' type="password">
+		          </div>
+		        </div>
+				<div class="zq-form-group">
+					<div class="zq-row-login">
+							<input class="form-control zq-validate"   name="captcha" placeholder="验证码" onkeyup='loginEnterToQuery(event);' type="text">
+							<img class="img-rounded" id="patchca_img" onclick="changePatchca();" src="${ctxPath}/common/captcha/get/loginCaptcha" style="width: 86px;height: 34px;" alt="验证码" class="img-rounded">
+					</div>
+				</div>
+<!--
+				<div class="form-group">
+		          <div class="col-md-12">
+	             	<div class="checkbox control-wrapper">
+	                	<label>
+	                  		<input type="checkbox"> Remember me
+                		</label>
+	              	</div>
+		          </div>
+		        </div>-->
+		        <div class="zq-form-group" style="    margin-left: 12px;">
+		          <div class="zq-row-login">
+		          		<input type="button" value="登 录" class="btn btn-info zq-loginbtn" style="    width: 300px;">
+		          		<!--<a href="#" class="text-right pull-right">Forgot password?</a>-->
+		          </div>
+		        </div>
+		        <hr class="zq-hr-login">
+				<div class="text-center" style="    margin-bottom: 10px;">
+					<span class="label label-danger">${message!}</span>
+				</div>
+		      </form>
+
+		</div>
+	</div>
+	<script>
+        var zqCtxPath="${ctxPath}";
+	</script>
+
+	<script type="text/javascript" src="${ctxPath}/plugin/jquery/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="${ctxPath}/plugin/js-spark-md5/spark-md5.js"></script>
+	<script type="text/javascript" src="${ctxPath}/static/console/js/login.js"></script>
+
+</body>
+</html>

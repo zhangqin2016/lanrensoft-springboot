@@ -1,0 +1,93 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote zq-table-head">
+    Banner轮播
+</blockquote>
+                <div class='row zq-row'>
+                        <form name="boBanner_form" id="boBanner_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='Banner题目'  >Bann...：</label>
+ <input  onkeyup='boBannerConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='title' name='title' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='目标地址'  >目标地址：</label>
+ <input  onkeyup='boBannerConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='target' name='target' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='跳转类型' >跳转类型：</label>
+ <select class="form-control" id="targetType" name="targetType">
+ <option  value="">请选择...</option>
+ 	<option  value="1">网页</option>
+ </select>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='Banner类型' >Bann...：</label>
+ <select class="form-control" id="type" name="type">
+ <option  value="">请选择...</option>
+ 	<option  value="1">官网首页轮播</option>
+ </select>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='排序'  >排序：</label>
+ <input  onkeyup='boBannerConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='sort' name='sort' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='状态' >状态：</label>
+ <select class="form-control" id="status" name="status">
+ <option  value="">请选择...</option>
+ 	<option  value="1">可用</option>
+ 	<option  value="0">不可用</option>
+ </select>
+ </div>
+ 
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <button type='button' class='btn btn-default' id='boBannerQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='boBannerReset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                 <div id="boBannerToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boBanner','${ctxPath}/console/bo_banner/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boBannerConsoleGrid.delete("id","${ctxPath}/console/bo_banner/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="boBanner" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_banner/json"
+                                         data-pagination="true"
+                                         data-query-params="boBannerLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boBannerToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='title'>Banner题目</th>
+  <th data-field='bannerImg' data-sortable='true' data-formatter='boBannerbanner_imgFormatter'>banner图片</th>
+  <th data-sortable='true' data-field='target'>目标地址</th>
+  <th data-field='targetType' data-sortable='true' data-formatter='boBannertarget_typeFormatter'>跳转类型</th>
+  <th data-field='type' data-sortable='true' data-formatter='boBannertypeFormatter'>Banner类型</th>
+  <th data-sortable='true' data-field='sort'>排序</th>
+  <th data-field='status' data-sortable='true' data-formatter='boBannerstatusFormatter'>状态</th>
+  <th data-field='id' data-formatter='boBannerTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type='text/javascript' src='/view/console/boBanner/boBannerTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

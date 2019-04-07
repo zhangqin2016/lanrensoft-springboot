@@ -1,0 +1,83 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote zq-table-head">
+    
+</blockquote>
+                <div class='row zq-row'>
+                        <form name="boTestUser_form" id="boTestUser_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='用户姓名'  >用户姓名：</label>
+ <input  onkeyup='boTestUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='name' name='name' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='用户年龄'  >用户年龄：</label>
+ <input  onkeyup='boTestUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='age' name='age' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='用户性别' >用户性别：</label>
+ <select class="form-control" id="userSex" name="userSex">
+ <option  value="">请选择...</option>
+ 	<option  value="1">男</option>
+ 	<option  value="0">女</option>
+ </select>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='学校等级' >学校等级：</label>
+ <select class="form-control" id="userSchoolGrade" name="userSchoolGrade">
+ <option  value="">请选择...</option>
+ 	<option  value="1">1级</option>
+ 	<option  value="2">2级</option>
+ 	<option  value="3">3级</option>
+ </select>
+ </div>
+ 
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <button type='button' class='btn btn-default' id='boTestUserQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='boTestUserReset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                 <div id="boTestUserToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boTestUser','${ctxPath}/console/bo_test_user/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boTestUserConsoleGrid.delete("id","${ctxPath}/console/bo_test_user/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="boTestUser" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_test_user/json"
+                                         data-pagination="true"
+                                         data-query-params="boTestUserLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boTestUserToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='name'>用户姓名</th>
+  <th data-sortable='true' data-field='age'>用户年龄</th>
+  <th data-field='userHeadImg' data-sortable='true' data-formatter='boTestUseruser_head_imgFormatter'>用户头像</th>
+  <th data-sortable='true' data-field='userFile'>用户资料</th>
+  <th data-field='userSex' data-sortable='true' data-formatter='boTestUseruser_sexFormatter'>用户性别</th>
+  <th data-field='userSchoolGrade' data-sortable='true' data-formatter='boTestUseruser_school_gradeFormatter'>学校等级</th>
+  <th data-field='id' data-formatter='boTestUserTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type='text/javascript' src='${ctxPath}/view/console/boTestUser/boTestUserTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

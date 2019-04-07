@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/view/console/common/css.html"){}	%>
+
+ <title></title>
+ </head>
+ <body>
+ <div class="zq-form">
+ <form name="sysDictionary_form"  id="sysDictionary_form" class="form-horizontal" style="margin-bottom: 70px;">
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">值</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="value" id="value" class="form-control" check-type="required" value='${sysDictionary.value!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">描述标题</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="des" id="des" class="form-control" check-type="required" value='${sysDictionary.des!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">名称</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="name" id="name" class="form-control" check-type="required" value='${sysDictionary.name!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">是否是默认值</label>
+ <div class="col-sm-6 col-xs-6">
+ <div class="radio">
+ <label><input checked='checked' auto_name='sysDictionary_defaultValue' type="radio"  name="defaultValue" value="0"/>否</label>
+ <label><input  auto_name='sysDictionary_defaultValue' type="radio"  name="defaultValue" value="1"/>是</label>
+  
+ </div>
+ </div>
+  </div>
+  <input  type="hidden"  name="code" id="code" class="form-control" value='${sysDictionary.code!}' >
+
+  <input type='hidden' name='id' id='id' value='${sysDictionary.id!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ </form>
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+   <div class="nav navbar-nav navbar-right">
+    <a href="#" class="btn btn-success" style="margin: 10px 60px 10px 10px"  onclick='saveZqForm()'>保存 </a>
+   </div>
+  </nav>
+ </div>
+ <% include("/view/console/common/js.html"){} 	%>
+ <script type='text/javascript' src='/view/console/sysDictionary/sysDictionaryForm.js'></script>
+ </body>

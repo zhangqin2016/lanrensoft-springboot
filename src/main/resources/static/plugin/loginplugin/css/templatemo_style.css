@@ -1,0 +1,61 @@
+html{
+	height: 100%;
+}
+.login-zq {
+	/* margin-right: 200px; */
+	float: right;
+	width: 440px;
+	margin-right: -27px;
+	margin-top: 156px;
+	height: 440px;
+}
+.zq-form-group{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.form-control{
+	width: 300px;
+	display: inline-block;
+}
+.zq-row-login{
+	width: 100%;
+	padding-top:20px;
+}
+.fa-label{
+	margin-right: 10px;
+}
+.zq-validate {
+	width: 209px;
+	margin-left: 14px;
+}
+.zq-loginbtn{
+	width: 82%;
+	margin-left: 6%;
+}
+.zq-hr-login{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #eeeeee;
+}
+
+.zq-row-head{
+	width: 100%;
+	padding-top: 20px;
+	margin-left: 12px;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-weight: 600;
+}
+.zq-form-login{
+	border: 1px solid #eeeeee;
+	border-radius: 10px;
+	background-color: rgba(255,255,255,0.4);
+}
+.map-zq{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	padding: 10px 10px 20px 10px;
+}

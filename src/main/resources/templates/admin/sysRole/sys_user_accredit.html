@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body>  
+						<div class="zq-row row">
+							${sys_user.nickName}：角色列表
+						</div>
+                        <div class="zq-row row">
+							${sys_roles!}
+                        </div>
+							<input type="hidden" id="user_id" value="${sys_user.suId}">
+ <script type="text/javascript">
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='save()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+   <script type="text/javascript">
+       layui.use(['layer','laydate'], function(){
+
+       });
+   function save(){
+       var role_ids=[];
+       $("input[name='role_name']:checked").each(function(i,t){
+	   role_ids.push($(t).val());
+       })
+     $.post(zqCtxPath+"/console/sys_role/do_user_accredit/"+$("#user_id").val(),{ids:role_ids.join(",")},function(data){
+          layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+             parent.layer.closeAll();
+         });
+     });
+   }
+   </script>
+ </body>
+ 

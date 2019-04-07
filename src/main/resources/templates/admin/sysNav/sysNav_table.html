@@ -1,0 +1,119 @@
+<% var html={ %>
+                <div class='row zq-row'>
+                        <form name="sysNav_form" id="sysNav_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <label title='菜单名称'  >菜单名称：</label>
+                                <input  onkeyup='sysNavConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='name' name='name' placeholder=''>
+                            </div>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <label title='状态' >状态：</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option  value="">请选择...</option>
+                                    <option  value="1">可用</option>
+                                    <option  value="0">不可用</option>
+                                </select>
+                            </div>
+
+                            <input type='hidden' class='form-control' id='pid' name='pid' value="${p_id!0}">
+                            <input type='hidden' class='form-control' id='levels' name='levels' value="${level!1}">
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <button type='button' class='btn btn-default' id='sysNavQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='sysNavReset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                <div id="sysNavToolbar" class="btn-group">
+                    <button type="button" class="btn btn-default" onclick="consoleOpenWindow('sysNav','${ctxPath}/console/sys_nav/add?p_id=${p_id!0}&level=${level!1}','新增')">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick='sysNavConsoleGrid.delete("navId","${ctxPath}/console/sys_nav/delete");'>
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </div>
+                <div class='row zq-row'>
+                    <div class='col-md-12'>
+                        <table id="sysNav" data-toggle="table"
+                               data-url="${ctxPath}/console/sys_nav/json"
+                               data-pagination="true"
+                               data-query-params="sysNavLoadParam"
+                               method="post"
+                               data-side-pagination="server"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-pagination-loop="false"
+                               data-show-columns="true"
+                               data-toolbar="#sysNavToolbar">
+                            <thead>
+                            <tr>
+                                <th data-checkbox="true"></th>
+                                <th data-field='navId' data-visible='false'>ID</th>
+                                <th data-sortable='true' data-field='name'>菜单名称</th>
+                                <th data-sortable='true' data-field='url'>菜单地址</th>
+                                <th data-sortable='true' data-field='iconUrl' data-formatter="iconFormat">菜单图标</th>
+                                <th data-sortable='true' data-field='sort'>排序</th>
+                                <th data-field='status' data-sortable='true' data-formatter='sysNavstatusFormatter'>状态</th>
+                                <th data-sortable='true' data-field='level'>菜单级别</th>
+                                <th data-field='navId' data-formatter='sysNavTableOperate'>操作</th>
+
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+<% }; %>
+<% var js={ %>
+<script type="text/javascript">
+    layui.use(['layer','laydate'], function(){
+
+    });
+
+    function iconFormat(v) {
+        return '<span class="'+v+'"></span>';
+    }
+    var sysNavConsoleGrid =new consoleGrid({table_id:"sysNav"});
+    sysNavConsoleGrid.init();
+    function sysNavTableOperate(value){
+        return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysNav\",\"${ctxPath}/console/sys_nav/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='openNextWindow(\""+value+"\")'>下级菜单</button> ";
+    }
+    function openNextWindow(id){
+        var level=parseInt('${level!1}')+1;
+        window.open("${ctxPath}/console/sys_nav/list?p_id="+id+"&level="+level+"","_self");
+    }
+    function sysNavLoadParam(params){
+        params.query=sysNavQueryString();
+        //防止304
+        params.reqtime=new Date().getTime();
+        return params;
+    }
+    function sysNavQueryString() {
+        var objQuery = new Object();
+        objQuery.pid=$('#pid').val()==''?null:$('#pid').val();
+        objQuery.name=$('#name').val()==''?null:$('#name').val();
+        objQuery.status=$('#status').val()==''?null:$('#status').val();
+        objQuery.levels=$('#levels').val()==''?null:$('#levels').val();
+
+        var queryString = JSON.stringify(objQuery);
+        return queryString;
+    }
+
+    function sysNavstatusFormatter(value)
+    {
+        var showValue;
+        switch(value+''){
+            case '1':
+                showValue = '可用';
+                break;
+            case '0':
+                showValue = '不可用';
+                break;
+        }
+        if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){
+            return '<span class="label label-warning">'+showValue+'</span>';
+        }else{
+            return '<span class="label label-info">'+showValue+'</span>';
+        }
+    }
+
+     </script>
+<% }; %>
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

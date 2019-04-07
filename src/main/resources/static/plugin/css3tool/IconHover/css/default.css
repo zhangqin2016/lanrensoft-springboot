@@ -1,0 +1,112 @@
+/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@font-face {
+	font-family: 'codropsicons';
+	src:url('../fonts/codropsicons/codropsicons.eot');
+	src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+body, html { font-size: 100%; padding: 0; margin: 0;}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	color: #aaa;
+	background: #fff;
+}
+
+a {
+	color: #ccc;
+	text-decoration: none;
+}
+
+.no-touch a:hover,
+.no-touch a:active {
+	color: #333;
+}
+
+.container {
+	height: 100%;
+	position: relative;
+}
+.title{
+	color:#FFF;
+	text-align:center;
+	margin:0;
+	padding:20px;
+	}
+.container > section {
+	min-height: 100%;
+	margin: 0 auto;
+	padding: 20em 3em;
+}
+
+.touch .container > section {
+	padding: 0;
+	min-height: 0;
+}
+
+.container > header {
+	margin: 0 auto;
+	padding: 2em 1em 2em;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	background: #fff;
+	z-index: 999999;
+	-webkit-backface-visibility: hidden;
+}
+
+.touch .container > header {
+	position: relative;
+}
+
+.container > header h1 {
+	font-size: 2.625em;
+	line-height: 1.3;
+	margin: 0;
+	font-weight: 300;
+}
+
+.container > header span {
+	display: block;
+	font-size: 60%;
+	opacity: 0.6;
+	padding: 0 0 0.6em 0.1em;
+}
+
+.container > section p {
+	color: #fff;
+	text-align: center;
+	padding: 1em;
+	margin: 0;
+}
+
+
+#set-1 {
+	background: #41ab6b;
+}
+
+
+
+
+
+@media screen and (max-width: 25em) {
+
+	.codrops-icon span {
+		display: none;
+	}
+
+}

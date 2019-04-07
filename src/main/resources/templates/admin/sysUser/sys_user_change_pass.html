@@ -1,0 +1,91 @@
+<% var html ={ %>
+ <div class="zq-row row">
+				<div class="col-md-3 column">
+			    </div>
+				<div class="col-md-1 column">
+				<ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+    			  <li role="presentation" ><a href="${ctxPath}/console/sys_user/base">个人信息</a></li>
+     				<!--  <li role="presentation"><a href="${ctxPath}/console/dev_company/authentication">认证信息</a></li> -->
+      				<li role="presentation" class="active"><a href="#">修改密码</a></li>
+   					 </ul>
+				</div>
+	 	<div class="col-md-6 column">
+	 	<form role="form" id="form" class="form-horizontal">
+                
+                    <div class="form-group clearfix">
+                        <label class="col-xs-2 text-right">原始密码</label>
+                        <div class="col-sm-10">
+                       	<input class="form-control" type="password" id="old_password"  value="" >
+                        </div>
+                    </div>
+                     <div class="form-group clearfix">
+                        <label class="col-xs-2 text-right">新密码</label>
+                        <div class="col-sm-10">
+                       	<input class="form-control" type="password" id="new_password1"  value="" >
+                        </div>
+                    </div>
+                      <div class="form-group clearfix">
+                        <label class="col-xs-2 text-right">确认密码</label>
+                        <div class="col-sm-10">
+                       	<input class="form-control" type="password" value=""  id="new_password">
+                        </div>
+                    </div>
+                        <div class="form-group clearfix">
+                         <div class="col-sm-2">
+                         </div>
+                        <div class="col-sm-10">
+                      		<input class="btn btn-success btn-sm" type="button" value="确认" id="save">
+                        </div>
+                    </div>
+                </form>
+
+		</div>
+ </div>
+<% } ;%>
+<% var js = { %>
+	<script type="text/javascript">
+        layui.use(['layer','laydate'], function(){
+
+        });
+	$(function($){
+	    $("#save").click(function(){
+		var v=false;
+		var old_password=$("#old_password").val();
+		var new_password=$("#new_password").val();
+		var new_password1=$("#new_password1").val();
+		var m="";
+		if(old_password==""){
+		    v=false;
+		    m="原始密码不能为空";
+		}else  if(new_password==""){
+		    v=false;
+		    m="新密码不能为空";
+		}else if(new_password!=new_password1){
+		    v=false;
+		    m="新密码与确认密码不一致";
+		}else{
+		    v=true;
+		}
+		 if (!v) {
+             layer.msg(m);
+		 	return false;  
+		 }else{
+
+		     $.post(zqCtxPath+"/console/sys_user/dochangepass",{new_password:SparkMD5.hash($("#new_password").val()),old_password:SparkMD5.hash($("#old_password").val())},function(data){
+                 if(data.state==1){
+                     layer.alert(data.message,function () {
+                         window.location="/console/logout","_self";
+                     });
+                 }else{
+                     layer.alert(data.message);
+                 }
+
+		     });
+		 }
+	    });
+	});
+	</script>
+
+<% } ;%>
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>
+ 

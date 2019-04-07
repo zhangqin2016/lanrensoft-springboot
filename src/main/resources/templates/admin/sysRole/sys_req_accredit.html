@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<% include("/view/console/common/css.html"){} %> <%
+include("/view/console/common/js.html"){} %>
+<title></title>
+</head>
+<body>
+<div class="container-fluid">
+<form class="form-border" style="margin-bottom: 50px;">
+	<div class="smart-widget">
+		<div class="smart-widget-header">角色:${sys_role.roleName!}</div>
+	</div>
+	<div class="smart-widget-header" id="tree" >
+	</div>
+	</form >
+</div>
+		<input type="hidden" id="roleId" value="${sys_role.roleId}">
+	<script type="text/javascript">
+
+    </script>
+	<nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+	<div class="container" style="padding-top: 10px; padding-bottom: 10px;">
+		<div class="nav navbar-nav navbar-right">
+			<a href="#" class="btn btn-success" onclick='save()'>保存 </a>
+		</div>
+	</div>
+	</nav>
+	<script type="text/javascript">
+        layui.use(['layer','laydate'], function(){
+
+        });
+		$(function($){
+			$.getJSON("${ctxPath}/console/sys_role/req/group/json",function(data){
+				$(data.data).each(function(i,nav){
+				$("#tree").append('<div id="tree_'+i+'" class="col-md-6" style="margin-bottom: 50px;"></div>');
+				$('#tree_'+i+'').bstree({url:'${ctxPath}/console/sys_role/req_accredit/json?role_id=${sys_role.roleId}&group='+nav,checkbox:true,height:'auto',showurl:false});
+				});
+			});
+
+		});
+	function save() {
+		var nav_urls = [];
+		$(".treecheckbox:checked").each(function(i,o){
+            nav_urls.push($(o).parent().attr("url"));
+		});
+
+	    $.post(zqCtxPath+"/console/sys_role/do_req_accredit/"+$("#roleId").val()+"", {
+		urls : nav_urls.join(",")
+	    }, function(data) {
+             layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+                parent.layer.closeAll();
+            });
+
+        });
+	}
+    </script>
+</body>

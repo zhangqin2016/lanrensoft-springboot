@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/view/console/common/css.html"){}	%>
+
+ <title></title>
+ </head>
+ <body>
+ <div class="zq-form">
+ <form name="boWebImage_form"  id="boWebImage_form" class="form-horizontal" style="margin-bottom: 70px;">
+   <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">图片标题</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="imageTitle" id="imageTitle" class="form-control" check-type="" maxlength='255' value='${boWebImage.imageTitle!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">图片描述</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="imageDes" id="imageDes" class="form-control" check-type="" maxlength='255' value='${boWebImage.imageDes!}' >
+ </div>
+  </div>
+  <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">图片地址</label>
+ <div class="col-sm-3 col-xs-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="imageUrl_file" class="form-control" value='${boWebImage.imageUrl!}' >
+  <input type="hidden" id="imageUrl"  name="imageUrl"class="form-control" value='${boWebImage.imageUrl!}' >
+    </span>
+  <div id="imageUrl_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4 col-xs-4">
+   	<img id="imageUrl_file_show" src="${boWebImage.imageUrl!}" style="width:100px;word-wrap: break-word;" alt="图片" class="img-rounded">
+ </div>
+ </div>
+   <input type='hidden' name='id' id='id' value='${boWebImage.id!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ </form>
+  <nav class="navbar navbar-default navbar-fixed-bottom" style="text-align: right">
+    <a href="#" class="btn btn-success" style="margin:10px" id = "saveForm">保存 </a>
+  </nav>
+ </div>
+ <% include("/view/console/common/js.html"){} 	%>
+ <script>
+
+
+    layui.use(['layer','laydate'], function(){
+    var laydate = layui.laydate;
+    var layer = layui.layer;
+    /*开启表单验证*/
+    $("#boWebImage_form").validation();
+        consoleUploadAliImg('imageUrl','');
+
+
+
+    $("#saveForm").click(function(){
+        saveZqForm();
+
+    })
+    function saveZqForm(){
+        if ($("#boWebImage_form").valid() == false) {
+        return false;
+        }
+        var formObject=new Object();
+        formObject.imageUrl=$('#imageUrl').val()==''?null:$('#imageUrl').val(); 
+ formObject.imageTitle=$('#imageTitle').val()==''?null:$('#imageTitle').val(); 
+ formObject.imageDes=$('#imageDes').val()==''?null:$('#imageDes').val(); 
+ formObject.id=$('#id').val()==''?null:$('#id').val(); 
+ 
+        var formObjectJson = JSON.stringify(formObject);
+        $.post("/console/bo_web_image/save",
+        {
+        formObjectJson :formObjectJson,
+        common_token :$("#common_token").val()
+        }, function(data) {
+        layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+        parent.$("#boWebImage").bootstrapTable("refresh");
+        parent.layer.closeAll();
+        });
+
+        });
+        }
+    });
+
+ </script>
+ </body>

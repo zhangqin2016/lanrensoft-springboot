@@ -1,0 +1,49 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote zq-table-head">
+    数据字段
+</blockquote>
+                 <div id="sysDictionaryToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('sysDictionary','${ctxPath}/console/sys_dictionary/add/${code}','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='sysDictionaryConsoleGrid.delete("id","${ctxPath}/console/sys_dictionary/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="sysDictionary" data-toggle="table"
+                                         data-url="${ctxPath}/console/sys_dictionary/json"
+                                         data-pagination="true"
+                                         data-query-params="sysDictionaryLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#sysDictionaryToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+                                          <th data-sortable='true' data-field='name'>显示值</th>
+  <th data-sortable='true' data-field='value'>真实值</th>
+  <th data-sortable='true' data-field='des'>描述</th>
+  <th data-field='id' data-formatter='sysDictionaryTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script>
+    var code = "${code}";
+</script>
+<script type='text/javascript' src='/view/console/sysDictionary/sysDictionaryTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

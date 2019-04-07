@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/view/console/common/css.html"){}	%>
+ <% include("/view/console/common/js.html"){} 	%>
+ <title></title>
+ </head>
+ <body>
+ <div class="zq-form">
+ <form name="sysRole_form"  id="sysRole_form" class="form-horizontal"  >
+   <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">角色名</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="roleName" id="roleName" class="form-control" check-type="required" value='${sysRole.roleName!}' >
+ </div>
+  </div>
+   <input type='hidden' name='roleId' id='roleId' value='${sysRole.roleId!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </div>
+ <script type="text/javascript">
+     layui.use(['layer','laydate'], function(){
+
+     });
+ $(function($) {
+    /*开启表单验证*/
+ 	$("#sysRole_form").validation();
+ });
+ /*保存*/
+ function saveZqForm(){
+    if ($("#sysRole_form").valid() == false) {
+ 	    return false;
+    }
+    var formObject=new Object();
+    formObject.roleName=$('#roleName').val()==''?null:$('#roleName').val(); 
+     formObject.status=1;
+     formObject.pid=0;
+     formObject.roleId=$('#roleId').val()==''?null:$('#roleId').val();
+ 
+    var formObjectJson = JSON.stringify(formObject);
+    $.post(zqCtxPath+"/console/sys_role/save",
+     {
+           formObjectJson :formObjectJson,
+ 	   table_name :'sysRole',
+ 	   common_token :$("#common_token").val()
+     }, function(data) {
+             layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+                parent.$("#sysRole").bootstrapTable("refresh");
+                parent.layer.closeAll();
+            });
+
+        });
+ }
+ </script>
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+ <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+  </nav>
+ </body>

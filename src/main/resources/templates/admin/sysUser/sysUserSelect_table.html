@@ -1,0 +1,137 @@
+<% layout("/view/console/skins/skin_2/layout_nohead.html", {}) {
+%>
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <form name="sysUser_form" id="sysUser_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='用户名'  >用户名：</label>
+ <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='userName' name='userName' placeholder=''>
+ </div>
+                            <div class="form-group col-md-4 col-xs-6" >
+                                <label  >部门</label>
+                                    <select   name="departmentId" id="departmentId" class="form-control" check-type="required"></select>
+                            </div>
+                            <script>
+                                $(function($) {
+                                    componentSelectInit(
+                                            {
+                                                ctxPath:'${ctxPath}',
+                                                tableName:"sys_department",
+                                                showValueField:"department_name",
+                                                valueField:"department_id",
+                                                selectId:"departmentId"
+                                            }
+                                            ,function(){
+                                                $("#departmentId").val("${sysUser.departmentId!''}");
+                                            });
+                                });
+                            </script>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='昵称'  >昵称：</label>
+ <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='nickName' name='nickName' placeholder=''>
+ </div>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <label title='状态' >状态：</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option  value="">请选择...</option>
+                                    <option  value="1">可用</option>
+                                    <option  value="0">不可用</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div align="center">
+                        <button type='button' class='btn btn-default' id='sysUserQuerySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='sysUserReset'>重置</button>
+                    </div>
+                </div>
+                     <div class='row'>
+                              <div class='col-md-12'>
+                                  <table id="sysUser" data-toggle="table"
+                                         data-url="${ctxPath}/console/sys_user/json"
+                                         data-pagination="true"
+                                         data-query-params="sysUserLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#sysUserToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='suId' data-visible='false'>ID</th>
+                                          <th data-field='departmentId' data-visible='false'>departmentId</th>
+  <th data-sortable='true' data-field='userName'>用户名</th>
+  <th data-sortable='true' data-field='nickName'>昵称</th>
+  <th data-sortable='true' data-field='userPic' data-formatter='sysUseruser_picFormatter'>头像</th>
+  <th data-sortable='true' data-field='status' data-formatter='sysUserstatusFormatter'>状态</th>
+  <th data-field='suId' data-formatter='sysUserTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+     var sysUserConsoleGrid =new consoleGrid({table_id:"sysUser"});
+     sysUserConsoleGrid.init();
+     function sysUserTableOperate(value){
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='choose(\""+value+"\")'>选择</button> ";
+     }
+     function choose(value){
+         parent.$("#boUserPrincipal").val(value);
+         parent.art.dialog.get('id-dialog-sysUserChoose').close();
+     }
+    function sysUserLoadParam(params){
+        params.query=sysUserQueryString();
+        return params;
+    }
+     function sysUserQueryString() {
+         var objQuery = new Object();
+            objQuery.userName=$('#userName').val()==''?null:$('#userName').val();
+            objQuery.nickName=$('#nickName').val()==''?null:$('#nickName').val();
+            objQuery.status=$('#status').val()==''?null:$('#status').val();
+         objQuery.departmentId=$("#departmentId").val()==''?null:$('#departmentId').val();
+         var queryString = JSON.stringify(objQuery);
+         return queryString;
+     }
+     function accreditRole(id){
+         consoleOpenWindow("accreditRole","${ctxPath}/console/sys_role/user_accredit/"+id,"授权");
+     }
+     function sysUseruser_picFormatter(value)
+     {
+         return '<a href="'+value+'" target="_blank" > <img style="height:50px;" src="'+value+'" alt="缩略图"> </a>';
+     }
+     function sysUserstatusFormatter(value)
+     {
+         var showValue;
+         switch(value+''){
+             case '1':
+                 showValue = '可用';
+                 break;
+             case '0':
+                 showValue = '不可用';
+                 break;
+         }
+         if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){
+             return '<span class="label label-warning">'+showValue+'</span>';
+         }else{
+             return '<span class="label label-info">'+showValue+'</span>';
+         }
+     }
+    
+ </script>
+<%} %>
+ 

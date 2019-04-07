@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head>
+ <meta charset="utf-8">
+ <title></title>
+ <meta name="renderer" content="webkit">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+ <meta name="apple-mobile-web-app-status-bar-style" content="black">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+ <link rel="shortcut icon"href="/static/image/logo_black.png">
+ <meta name="format-detection" content="telephone=no">
+ <% include("/view/console/common/css.html"){}	%>
+<body>
+<div class="zq-layout-body">
+<header class="navbar navbar-static-top zq-header-nav" id="top">
+  <div class="navbar-header">
+   <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+   </button>
+   <a href="/" class="navbar-brand">后台管理</a>
+  </div>
+  <nav  class="collapse navbar-collapse" id="bs-navbar">
+   <ul class="nav navbar-nav"  id="firstNav">
+   </ul>
+   <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+     <a href="#" class="dropdown-toggle nav-dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${session.user.userNickName!} <span class="caret"></span></a>
+     <ul class="dropdown-menu nav-dropdown-menu">
+      <li><a href="${ctxPath}/console/sys_user/base">个人中心</a></li>
+      <li><a href="#">系统消息</a></li>
+      <li><a href="${ctxPath}/console/logout">退出系统 </a></li>
+     </ul>
+    </li>
+   </ul>
+  </nav>
+</header>
+<div class="zq-left-nav">
+ <ul class="nav navbar-nav navbar-nav-left" id="secondNav"> </ul>
+</div>
+<div class="zq-main-body">
+<div class="zq-sell-container">
+ ${html!}
+</div>
+</div>
+</div>
+<div class="zq-bottom">
+ <hr>
+ <p>© 2018 <a href="#"></a> MIT license</p>
+ <p>
+  <a href="#" target="_blank">后台管理</a>
+  <% include("/view/console/common/js.html"){} 	%>
+  <script src="${ctxPath}/static/console/js/nav.js"></script>
+</div>
+${js!}
+</body></html>

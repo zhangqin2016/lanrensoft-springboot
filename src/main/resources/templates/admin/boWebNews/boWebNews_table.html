@@ -1,0 +1,93 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote zq-table-head">
+    新闻
+</blockquote>
+                <div class='row zq-row'>
+                        <form name="boWebNews_form" id="boWebNews_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='是否发布' >是否发布：</label>
+ <select class="form-control" id="publish" name="publish">
+ <option  value="">请选择...</option>
+ 	<option  value="0">未发布</option>
+ 	<option  value="1">已发布</option>
+ </select>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='作者'  >作者：</label>
+ <input  onkeyup='boWebNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='author' name='author' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='来源'  >来源：</label>
+ <input  onkeyup='boWebNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='source' name='source' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='标题'  >标题：</label>
+ <input  onkeyup='boWebNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='title' name='title' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='新闻类型' >新闻类型：</label>
+ <select class="form-control" id="newsType" name="newsType">
+ <option  value="">请选择...</option>
+ 	<option  value="1">普通新闻</option>
+ 	<option  value="2">项目简介</option>
+ 	<option  value="3">成果展示</option>
+ 	<option  value="4">建设进展</option>
+ </select>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='关键字'  >关键字：</label>
+ <input  onkeyup='boWebNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='keyword' name='keyword' placeholder=''>
+ </div>
+ 
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <button type='button' class='btn btn-default' id='boWebNewsQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='boWebNewsReset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                 <div id="boWebNewsToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boWebNews','${ctxPath}/console/bo_web_news/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boWebNewsConsoleGrid.delete("id","${ctxPath}/console/bo_web_news/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="boWebNews" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_web_news/json"
+                                         data-pagination="true"
+                                         data-query-params="boWebNewsLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boWebNewsToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-field='publish' data-sortable='true' data-formatter='boWebNewspublishFormatter'>是否发布</th>
+  <th data-sortable='true' data-field='author'>作者</th>
+  <th data-sortable='true' data-field='source'>来源</th>
+  <th data-field='cover' data-sortable='true' data-formatter='boWebNewscoverFormatter'>封面</th>
+  <th data-sortable='true' data-field='title'>标题</th>
+  <th data-field='newsType' data-sortable='true' data-formatter='boWebNewsnews_typeFormatter'>新闻类型</th>
+  <th data-sortable='true' data-field='keyword'>关键字</th>
+  <th data-field='id' data-formatter='boWebNewsTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type='text/javascript' src='/view/console/boWebNews/boWebNewsTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

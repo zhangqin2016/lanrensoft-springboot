@@ -1,0 +1,63 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote zq-table-head">
+    画廊
+</blockquote>
+                <div class='row zq-row'>
+                        <form name="boWebImage_form" id="boWebImage_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='图片标题'  >图片标题：</label>
+ <input  onkeyup='boWebImageConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='imageTitle' name='imageTitle' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='图片描述'  >图片描述：</label>
+ <input  onkeyup='boWebImageConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='imageDes' name='imageDes' placeholder=''>
+ </div>
+ 
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <button type='button' class='btn btn-default' id='boWebImageQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='boWebImageReset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                 <div id="boWebImageToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boWebImage','${ctxPath}/console/bo_web_image/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boWebImageConsoleGrid.delete("id","${ctxPath}/console/bo_web_image/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="boWebImage" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_web_image/json"
+                                         data-pagination="true"
+                                         data-query-params="boWebImageLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boWebImageToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-field='imageUrl' data-sortable='true' data-formatter='boWebImageimage_urlFormatter'>图片地址</th>
+  <th data-sortable='true' data-field='imageTitle'>图片标题</th>
+  <th data-sortable='true' data-field='imageDes'>图片描述</th>
+  <th data-field='id' data-formatter='boWebImageTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type='text/javascript' src='/view/console/boWebImage/boWebImageTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/view/console/common/css.html"){}	%>
+
+ <title></title>
+ </head>
+ <body>
+ <div class="zq-form">
+ <form name="boTestUser_form"  id="boTestUser_form" class="form-horizontal" style="margin-bottom: 70px;">
+   <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">用户姓名</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="name" id="name" class="form-control" check-type="" maxlength='255' value='${boTestUser.name!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">用户年龄</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="age" id="age" class="form-control" check-type=" number"  value='${boTestUser.age!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">用户性别</label>
+ <div class="col-sm-6 col-xs-6">
+ <div class="radio">
+ <label><input checked='checked' auto_name='boTestUser_userSex' type="radio"  name="userSex" value="1"/>男</label>
+ <label><input  auto_name='boTestUser_userSex' type="radio"  name="userSex" value="0"/>女</label>
+  
+ </div>
+ </div>
+  </div>
+ <div class="form-group">
+ <label class="control-label col-sm-2 col-xs-2">学校等级</label>
+ <div class="col-sm-6 col-xs-6">
+ 	<select class="form-control" id="userSchoolGrade"
+ 		name="userSchoolGrade" check-type="" maxlength='255'>
+ 	<option selected='selected' value="1">1级</option>
+ 	<option  value="2">2级</option>
+ 	<option  value="3">3级</option>
+ </select>
+ </div>
+ </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">用户描述</label>
+ <div class="col-sm-6 col-xs-6">
+   <textarea name="userDes" id="userDes" placeholder="请输入内容" check-type="" maxlength='255' class="layui-textarea">${boTestUser.userDes!}</textarea></div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">用户信息</label>
+ <div class="col-sm-6 col-xs-6">
+   <textarea name="userInfo" id="userInfo" placeholder="请输入内容" check-type=""  class="layui-textarea">${boTestUser.userInfo!}</textarea></div>
+  </div>
+  <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">用户头像</label>
+ <div class="col-sm-3 col-xs-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="userHeadImg_file" class="form-control" value='${boTestUser.userHeadImg!}' >
+  <input type="hidden" id="userHeadImg"  name="userHeadImg"class="form-control" value='${boTestUser.userHeadImg!}' >
+    </span>
+  <div id="userHeadImg_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4 col-xs-4">
+   	<img id="userHeadImg_file_show" src="${boTestUser.userHeadImg!}" style="width:100px;word-wrap: break-word;" alt="图片" class="img-rounded">
+ </div>
+ </div> <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">用户资料</label>
+ <div class="col-sm-3 col-xs-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="userFile_file" class="form-control" value='${boTestUser.userFile!}' >
+  <input type="hidden" id="userFile"  name="userFile"class="form-control" value='${boTestUser.userFile!}' >
+    </span>
+  <div id="userFile_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4 col-xs-4">
+   		<a id="userFile_file_show" href="${boTestUser.userFile!}" style="width:100px;word-wrap: break-word;" >${boTestUser.userFile!}</a>
+ </div>
+ </div>
+
+   <script type="text/javascript"> 
+ </script>
+   <input type='hidden' name='id' id='id' value='${boTestUser.id!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ </form>
+  <nav class="navbar navbar-default navbar-fixed-bottom" style="text-align: right">
+    <a href="#" class="btn btn-success" style="margin:10px" id = "saveForm">保存 </a>
+  </nav>
+ </div>
+ <% include("/view/console/common/js.html"){} 	%>
+ <script>
+
+
+    layui.use(['layer','laydate'], function(){
+    var laydate = layui.laydate;
+    var layer = layui.layer;
+    /*开启表单验证*/
+    $("#boTestUser_form").validation();
+           
+   $('input[auto_name="boTestUser_userSex"]').each(function(){
+    
+   if('${boTestUser.userSex!}'==this.value){ 
+             $(this).attr('checked','checked');
+            }
+           });
+ 
+	$("#userSchoolGrade").val("${boTestUser.userSchoolGrade!}");
+ 	if('${boTestUser.userSchoolGrade!}'==''){
+ 	    $("#userSchoolGrade").val('1');
+ 	}
+ var userInfoEdit = CKEDITOR.replace( 'userInfo' );consoleUploadAliImg('userHeadImg','');
+
+ consoleUploadAliFile('userFile','');
+
+
+
+    $("#saveForm").click(function(){
+        saveZqForm();
+
+    })
+    function saveZqForm(){
+        if ($("#boTestUser_form").valid() == false) {
+        return false;
+        }
+        var formObject=new Object();
+        formObject.name=$('#name').val()==''?null:$('#name').val(); 
+ formObject.age=$('#age').val()==''?null:$('#age').val(); 
+ formObject.userHeadImg=$('#userHeadImg').val()==''?null:$('#userHeadImg').val(); 
+ formObject.userFile=$('#userFile').val()==''?null:$('#userFile').val(); 
+ formObject.userSex=($('input[name="userSex"]:checked').val()==''?null:$('input[name="userSex"]:checked').val()); 
+ formObject.userSchoolGrade=$('#userSchoolGrade').val()==''?null:$('#userSchoolGrade').val(); 
+ formObject.userDes=$('#userDes').val()==''?null:$('#userDes').val(); 
+ formObject.userInfo=userInfoEdit.getData(); 
+ formObject.id=$('#id').val()==''?null:$('#id').val(); 
+ 
+        var formObjectJson = JSON.stringify(formObject);
+        $.post("/console/bo_test_user/save",
+        {
+        formObjectJson :formObjectJson,
+        common_token :$("#common_token").val()
+        }, function(data) {
+        layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+        parent.$("#boTestUser").bootstrapTable("refresh");
+        parent.layer.closeAll();
+        });
+
+        });
+        }
+    });
+
+ </script>
+ </body>

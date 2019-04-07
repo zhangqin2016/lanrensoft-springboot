@@ -1,0 +1,46 @@
+@charset "utf-8";
+@import url("http://www.w3cplus.com/download/reset.css");
+/* -------------------------------------------------
+ * common
+ * -------------------------------------------------
+*/
+.page{
+    text-align:left;
+	padding-top:40px;
+}
+.wrap_top_nav{
+    background-color:#333;
+	box-shadow:0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+	height:40px;
+}
+
+#read{
+    position:absolute;
+	right:0;
+	top:0;
+}
+#header{
+    text-align:center;
+	font-family:"微软雅黑";
+	font-weight:normal;
+}
+#header .white{
+    color:#666;
+}
+#header .blank{
+    color:#444;
+}
+#header h1{
+    font-size:24px;
+}
+#header h2{
+	font-weight:normal;
+}
+#ad_w3cplus {
+	width: 750px;
+	margin: 100px auto;
+	text-align: center;
+}
+#ad_w3cplus .grid-ad {
+ float:left;
+}

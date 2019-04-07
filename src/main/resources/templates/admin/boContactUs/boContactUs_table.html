@@ -1,0 +1,91 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote zq-table-head">
+    客户意向
+</blockquote>
+                <div class='row zq-row'>
+                        <form name="boContactUs_form" id="boContactUs_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='联系人'  >联系人：</label>
+ <input  onkeyup='boContactUsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='linkName' name='linkName' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='电话'  >电话：</label>
+ <input  onkeyup='boContactUsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='linkPhone' name='linkPhone' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='主题'  >主题：</label>
+ <input  onkeyup='boContactUsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='linkSub' name='linkSub' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='内容'  >内容：</label>
+ <input  onkeyup='boContactUsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='linkContent' name='linkContent' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='时间'  >时间：</label>
+ <input onFocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" onkeyup='boContactUsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='linkTime' name='linkTime' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='联系邮箱'  >联系邮箱：</label>
+ <input  onkeyup='boContactUsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='linkMail' name='linkMail' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='处理状态' >处理状态：</label>
+ <select class="form-control" id="linkState" name="linkState">
+ <option  value="">请选择...</option>
+ 	<option  value="0">未联系</option>
+ 	<option  value="1">已联系</option>
+ </select>
+ </div>
+ 
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <button type='button' class='btn btn-default' id='boContactUsQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='boContactUsReset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                 <div id="boContactUsToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boContactUs','${ctxPath}/console/bo_contact_us/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boContactUsConsoleGrid.delete("id","${ctxPath}/console/bo_contact_us/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="boContactUs" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_contact_us/json"
+                                         data-pagination="true"
+                                         data-query-params="boContactUsLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boContactUsToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='linkName'>联系人</th>
+  <th data-sortable='true' data-field='linkPhone'>电话</th>
+  <th data-sortable='true' data-field='linkSub'>主题</th>
+  <th data-sortable='true' data-field='linkContent'>内容</th>
+  <th data-sortable='true' data-field='linkTime'>时间</th>
+  <th data-sortable='true' data-field='linkMail'>联系邮箱</th>
+  <th data-field='linkState' data-sortable='true' data-formatter='boContactUslink_stateFormatter'>处理状态</th>
+  <th data-field='id' data-formatter='boContactUsTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type='text/javascript' src='/view/console/boContactUs/boContactUsTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

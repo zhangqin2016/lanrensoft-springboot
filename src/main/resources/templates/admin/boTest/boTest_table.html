@@ -1,0 +1,76 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote zq-table-head">
+    测试表格
+</blockquote>
+                <div class='row zq-row'>
+                        <form name="boTest_form" id="boTest_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='姓名'  >姓名：</label>
+ <input  onkeyup='boTestConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='name' name='name' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='出生日期_date'  >出生日期...：</label>
+ <input  onkeyup='boTestConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='birthday' name='birthday' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label title='年龄'  >年龄：</label>
+ <input  onkeyup='boTestConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='age' name='age' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6 zq-query'>
+ <label class="control-label col-sm-2 col-xs-2">性别</label>
+ 	<select class="form-control" id="sex"
+ 		name="sex" check-type="" maxlength='255'>
+ </select>
+ </div>
+ 
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                                <button type='button' class='btn btn-default' id='boTestQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='boTestReset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                 <div id="boTestToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boTest','${ctxPath}/console/bo_test/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boTestConsoleGrid.delete("id","${ctxPath}/console/bo_test/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="boTest" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_test/json"
+                                         data-pagination="true"
+                                         data-query-params="boTestLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boTestToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='name'>姓名</th>
+  <th data-field='birthday' data-sortable='true' data-formatter='dateTimeFormat'>出生日期</th>
+  <th data-sortable='true' data-field='age'>年龄</th>
+  <th data-field='imgUrl' data-sortable='true' data-formatter='boTestimg_urlFormatter'>头像</th>
+  <th data-sortable='true' data-field='sex'>性别</th>
+  <th data-sortable='true' data-field='fileMy'>个人档案</th>
+  <th data-field='id' data-formatter='boTestTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type='text/javascript' src='/view/console/boTest/boTestTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

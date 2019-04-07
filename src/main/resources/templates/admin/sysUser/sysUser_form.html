@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/view/console/common/css.html"){}	%>
+ <% include("/view/console/common/js.html"){} 	%>
+ <title></title>
+ </head>
+ <body>
+ <div class="zq-form">
+ <form name="sysUser_form"  id="sysUser_form" class="form-horizontal"  >
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">昵称</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"   name="nickName" id="nickName" class="form-control" check-type="required" value='${sysUser.nickName!}' >
+ </div>
+  </div>
+  <div class="form-group" >
+   <label class="col-sm-2 col-xs-2 control-label">登录账户</label>
+   <div class="col-sm-6 col-xs-6">
+    <input  type="text"  name="userAccount" id="userAccount" class="form-control" check-type="required" value='${sysUser.userAccount!}' >
+   </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">手机号</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="phone" id="phone" class="form-control" check-type="required" value='${sysUser.phone!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">邮箱</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="email" id="email" class="form-control" check-type="required" value='${sysUser.email!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">状态</label>
+ <div class="col-sm-6 col-xs-6">
+ <label><input checked='checked' auto_name='sysUser_status' type="radio"  name="status" value="1"/>可用</label>
+ <label><input  auto_name='sysUser_status' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+       $(function($){
+       $('input[auto_name="sysUser_status"]').each(function(){
+       if('${sysUser.status!}'==this.value){ 
+             $(this).attr('checked','checked');
+            }
+           });
+ 	    });
+ 	</script> 
+  <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">头像</label>
+ <div class="col-sm-3 col-xs-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="userPic_file" class="form-control" value='${sysUser.userPic!}' >
+  <input type="hidden" id="userPic"  name="userPic"class="form-control" value='${sysUser.userPic!}' >
+    </span>
+  <div id="userPic_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4 col-xs-4">
+   	<img id="userPic_file_show" src="${sysUser.userPic!}" style="width:100px;word-wrap: break-word;" alt="图片" class="img-rounded">
+ </div>
+ </div>
+
+   <script type="text/javascript"> 
+ $(function($){
+  consoleUploadAliImg('userPic','${ctxPath}');
+ });
+ </script> 
+   <input type='hidden' name='suId' id='suId' value='${sysUser.suId!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </div>
+ <script type="text/javascript">
+     layui.use(['layer','laydate'], function(){
+
+     });
+ $(function($) {
+    /*开启表单验证*/
+ 	$("#sysUser_form").validation();
+ });
+ /*保存*/
+ function saveZqForm(){
+    if ($("#sysUser_form").valid() == false) {
+ 	    return false;
+    }
+    var formObject=new Object();
+ formObject.nickName=$('#nickName').val()==''?null:$('#nickName').val();
+     formObject.userAccount=$('#userAccount').val()==''?null:$('#userAccount').val();
+ formObject.userPic=$('#userPic').val()==''?null:$('#userPic').val();
+
+ formObject.phone=$('#phone').val()==''?null:$('#phone').val();
+ formObject.email=$('#email').val()==''?null:$('#email').val(); 
+ formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val());
+ formObject.suId=$('#suId').val()==''?null:$('#suId').val(); 
+ 
+    var formObjectJson = JSON.stringify(formObject);
+    $.post(zqCtxPath+"/console/sys_user/save",
+     {
+           formObjectJson :formObjectJson,
+ 	   table_name :'sysUser',
+ 	   common_token :$("#common_token").val()
+     }, function(data) {
+             layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+                parent.$("#sysUser").bootstrapTable("refresh");
+                parent.layer.closeAll();
+            });
+
+        });
+ }
+ </script>
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+ <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+  </nav>
+ </body>

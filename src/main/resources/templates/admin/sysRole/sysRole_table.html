@@ -1,0 +1,146 @@
+<% var html={ %>
+                <div class='row zq-row'>
+                        <form name="sysRole_form" id="sysRole_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6'>
+ <label title='角色名'  >角色名：</label>
+ <input  onkeyup='sysRoleConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='roleName' name='roleName' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6'>
+ <label title='状态' >状态：</label>
+ <select class="form-control" id="status" name="status">
+ <option  value="">请选择...</option>
+ 	<option  value="0">禁用</option>
+ 	<option  value="1">可用</option>
+ </select>
+ </div>
+                             <div class='form-group col-md-4 col-xs-6'>
+                                <button type='button' class='btn btn-default' id='sysRoleQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='sysRoleReset'>重置</button>
+                            </div>
+                        </form>
+                    </div>
+
+                 <div id="sysRoleToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('sysRole','${ctxPath}/console/sys_role/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='sysRoleConsoleGrid.delete("roleId","${ctxPath}/console/sys_role/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                     <div class="btn-group" role="group">
+                         <button id="btnGroupVerticalDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             权限清除
+                             <span class="caret"></span>
+                         </button>
+                         <ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1">
+                             <li><a href="javascript:clearRole('/console/sys_role/clear/role/req')">清除请求权限</a></li>
+                             <li><a href="javascript:clearRole('/console/sys_role/clear/role/nav')">清除菜单权限</a></li>
+                         </ul>
+                     </div>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="sysRole" data-toggle="table"
+                                         data-url="${ctxPath}/console/sys_role/json"
+                                         data-pagination="true"
+                                         data-query-params="sysRoleLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#sysRoleToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='roleId' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='roleName'>角色名</th>
+  <th data-field='status' data-sortable='true' data-formatter='sysRolestatusFormatter'>状态</th>
+  <th data-field='roleId' data-formatter='sysRoleTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type="text/javascript">
+    layui.use(['layer','laydate'], function(){
+
+    });
+    function clearRole(url) {
+
+        var ids=[];
+        $($("#sysRole").bootstrapTable('getSelections')).each(function(i,o){
+            ids.push( eval("o.roleId"));
+        });
+        if(ids.length==0){
+
+            layer.msg('请选择要清除的数据');
+        }else{
+            //询问框
+            layer.confirm('是否清除？', {
+                btn: ['是','否'] //按钮
+            }, function(){
+                $.post(url,{ids:ids.join(",")},function(data){
+                    layer.msg(data.message);
+                });
+            }, function(){
+            });
+        }
+    }
+    var sysRoleConsoleGrid =new consoleGrid({table_id:"sysRole"});
+     sysRoleConsoleGrid.init();
+     function sysRoleTableOperate(value){
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysRole\",\"${ctxPath}/console/sys_role/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default command-edit' onclick='navAccredit(\""+value+"\")'>菜单授权</button>  <button type='button' class='btn btn-xs btn-default command-edit' onclick='reqAccredit(\""+value+"\")'>请求授权</button> ";
+     }
+
+     function navAccredit(id){
+         consoleOpenWindow('navAccredit',"${ctxPath}/console/sys_role/nav_accredit/"+id,'授权');
+
+     }
+
+     function reqAccredit(id){
+         consoleOpenWindow('reqAccredit',"${ctxPath}/console/sys_role/req_accredit/"+id,'授权');
+     }
+
+    function sysRoleLoadParam(params){
+        params.query=sysRoleQueryString();
+        //防止304
+        params.reqtime=new Date().getTime();
+        return params;
+    }
+     function sysRoleQueryString() {
+         var objQuery = new Object();
+                objQuery.roleName=$('#roleName').val()==''?null:$('#roleName').val(); 
+     objQuery.status=$('#status').val()==''?null:$('#status').val(); 
+     objQuery.pid=$('#pid').val()==''?null:$('#pid').val(); 
+ 
+         var queryString = JSON.stringify(objQuery);
+         return queryString;
+     }
+
+     function sysRolestatusFormatter(value) 
+   { 
+       var showValue; 
+       switch(value+''){
+       case '0': 
+       showValue = '禁用';
+       break;
+       case '1': 
+       showValue = '可用';
+       break;
+       }
+    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
+       return '<span class="label label-warning">'+showValue+'</span>';
+   }else{
+       return '<span class="label label-info">'+showValue+'</span>';
+   }
+   }
+
+ </script>
+<% }; %>
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>
+ 

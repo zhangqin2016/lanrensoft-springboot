@@ -1,0 +1,36 @@
+<% var html={ %>
+
+<div class="zq-row row">
+			<div class="row clearfix">
+				<div class="col-md-3 column">
+			</div>
+				<div class="col-md-1 column">
+				<ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+    			  <li role="presentation" class="active"><a href="#">个人信息</a></li>
+      				 <li role="presentation"><a href="${ctxPath}/console/sys_user/changepass">修改密码</a></li>
+   					 </ul>
+				</div>
+	 	<div class="col-md-6 column">
+            <div class="container-fluid">
+	 	<form role="form">
+                    <div class="form-group clearfix">
+                        <label class="col-xs-2 text-right">名称</label>
+                        <div class="col-sm-10">
+                            <span class="infoText">${session.user.userNickName}</span>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="col-xs-2 text-right">账户</label>
+                        <div class="col-sm-10">
+                            <span class="infoText">${session.user.userAccount}</span>
+                                                    </div>
+                    </div>
+                </form>
+            </div>
+		</div>
+	 </div>
+
+ </div>
+<%};%>
+<% layout("/view/console/skins/skin_2/layout.html", {html:html}) {} %>
+ 
