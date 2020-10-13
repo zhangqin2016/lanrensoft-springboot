@@ -28,7 +28,7 @@
         <beetl.version>2.9.8</beetl.version>
         <mysql-connector-java.version>5.1.6</mysql-connector-java.version>
         <fastjson.version>1.2.55</fastjson.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <!-- Add typical dependencies for a web application -->
